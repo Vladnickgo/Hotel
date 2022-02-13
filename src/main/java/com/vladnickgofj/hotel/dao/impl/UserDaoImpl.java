@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-// TODO: 2/9/2022 correct example
 public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements com.vladnickgofj.hotel.dao.UserDao {
 
     private static final String INSERT_QUERY = "INSERT INTO users(first_name, last_name, email, password, role_id) VALUES(?,?,?,?,?)";

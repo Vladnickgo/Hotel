@@ -8,12 +8,48 @@ public class Room {
     private final int price;
     private final int hotelId;
 
-    public Room(int id, int typeId, int numberOfBeds, int statusId, int price, int hotelId) {
+    public int getId() {
+        return id;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public int getNumberOfBeds() {
+        return numberOfBeds;
+    }
+
+    public int getStatusId() {
+        return statusId;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public Room(int id, int typeId, int numberOfBeds, int statusId, int price, int hotel_id) {
         this.id = id;
         this.typeId = typeId;
         this.numberOfBeds = numberOfBeds;
         this.statusId = statusId;
         this.price = price;
-        this.hotelId = hotelId;
+        this.hotelId = hotel_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", typeId=" + typeId +
+                ", numberOfBeds=" + numberOfBeds +
+                ", statusId=" + statusId +
+                ", price=" + price +
+                ", hotelId=" + hotelId +
+                '}';
     }
 }

@@ -1,6 +1,6 @@
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
-import com.vladnickgofj.hotel.dao.entity.Role;
-import com.vladnickgofj.hotel.dao.entity.User;
+import com.vladnickgofj.hotel.dao.entity.Room;
+import com.vladnickgofj.hotel.dao.impl.RoomDaoImpl;
 import com.vladnickgofj.hotel.dao.impl.UserDaoImpl;
 
 public class Main {
@@ -23,18 +23,26 @@ public class Main {
         HikariConnectionPool hikariConnectionPool = new HikariConnectionPool("bd-config");
 
         UserDaoImpl userDao = new UserDaoImpl(hikariConnectionPool);
+        RoomDaoImpl roomDao=new RoomDaoImpl(hikariConnectionPool);
 
 //        Optional<User> byId = userDao.findById(2);
-//        userDao.findAll();
+       userDao.findAll();
+       roomDao.findAll();
+       roomDao.save(new Room(1,2,3,1,200,1));
+       roomDao.update(new Room(2,2,3,1,170,1));
 //        System.out.println(byId);
 //        userDao.findByEmail("ayj@asd.asd");
 //        userDao.findAll();
 //        userDao.save();
-        userDao.update(new User(1, "St", "Hauss", "stepan@another.asd", "1234", Role.ADMIN));
-
+//        userDao.update(new User(1, "St", "Hauss", "stepan@another.asd", "1234", Role.ADMIN));
 //        userDao.save(new User(7, "Another", "Another", "another@another.asd", "1234", Role.USER));
 //        userDao.findAll();
-//
+
+
+//        roleDao.findAll();
+
+
+
 //        equalsObj(2, 5);
 //        Optional<Integer> user = Optional.ofNullable(NUMBER);
 //
