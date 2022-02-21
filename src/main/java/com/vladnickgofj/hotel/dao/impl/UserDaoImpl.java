@@ -14,7 +14,7 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements com.vladni
     private static final String INSERT_QUERY = "INSERT INTO users(first_name, last_name, email, password, role_id) VALUES(?,?,?,?,?)";
     private static final String FIND_BY_ID = "SELECT * FROM users WHERE user_id=?";
     private static final String UPDATE_USER = "UPDATE users SET first_name=?, last_name=?, email=?, password=?, role_id=? WHERE user_id=?";
-    //    private static final String DELETE_USER = "DELETE FROM users WHERE user_id=?";
+//    private static final String DELETE_USER = "DELETE FROM users WHERE user_id=?";
     private static final String FIND_ALL = "SELECT * FROM users";
     private static final String FIND_BY_EMAIL = "SELECT * FROM users WHERE email=?";
     private static final int DEFAULT_USER_ROLE_ID = 2;
@@ -29,17 +29,12 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements com.vladni
 
     @Override
     protected User mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        User user = null;
-        while (resultSet.next()) {
-            user = new User(resultSet.getInt("user_id"),
+     return new User(resultSet.getInt("user_id"),
                     resultSet.getString("first_name"),
                     resultSet.getString("last_name"),
                     resultSet.getString("email"),
                     resultSet.getString("password"),
                     Role.getRole(resultSet.getInt("role_id")));
-            System.out.println("User" + user);
-        }
-        return user;
     }
 
     @Override

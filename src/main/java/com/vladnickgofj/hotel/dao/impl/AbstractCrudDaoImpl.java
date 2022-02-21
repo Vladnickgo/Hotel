@@ -81,8 +81,11 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
 
     @Override
     public void update(E entity) {
-        try (Connection connection = connector.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+        try (Connection connection = connector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+
             mapForUpdateStatement(preparedStatement, entity);
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
 //            LOGGER.error("Update is failed", e);
@@ -93,23 +96,21 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
 
     @Override
     public List<E> findAll() {
-        try (Connection connection = connector.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(findAllQuery)) {
+        try (Connection connection = connector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(findAllQuery)) {
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 Set<E> entities = new HashSet<>();
-                entities.add(mapResultSetToEntity(resultSet));
-//                while (resultSet.next()) {
-////                    int row = resultSet.getRow();
-////                    System.out.println(row);
-//                    entities.add(mapResultSetToEntity(resultSet));
-////                    resultSet.absolute(row);
-//                }
-                System.out.println("=============findAll==============");
+                while (resultSet.next()) {
+                    int row = resultSet.getRow();
+                    entities.add(mapResultSetToEntity(resultSet));
+                    resultSet.absolute(row);
+                }
                 return new ArrayList<>(entities);
             }
         } catch (SQLException e) {
 //            LOGGER.error("Connection is failed" + e);
 //            throw new DataBaseRuntimeException(e);
-            throw new RuntimeException("FindAll is failed " + e);
+            throw new RuntimeException(e);
         }
     }
 
