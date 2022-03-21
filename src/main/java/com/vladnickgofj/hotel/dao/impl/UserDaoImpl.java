@@ -29,17 +29,14 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements com.vladni
 
     @Override
     protected User mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        User user = null;
-        while (resultSet.next()) {
-            user = new User(resultSet.getInt("user_id"),
-                    resultSet.getString("first_name"),
-                    resultSet.getString("last_name"),
-                    resultSet.getString("email"),
-                    resultSet.getString("password"),
-                    Role.getRole(resultSet.getInt("role_id")));
-            System.out.println("User" + user);
-        }
-        return user;
+            return User.newBuilder()
+                    .id(resultSet.getInt("user_id"))
+                    .firstName(resultSet.getString("first_name"))
+                    .lastName(resultSet.getString("last_name"))
+                    .email(resultSet.getString("email"))
+                    .password(resultSet.getString("password"))
+                    .role(Role.getRole(resultSet.getInt("role_id")))
+                    .build();
     }
 
     @Override
@@ -49,12 +46,11 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements com.vladni
         preparedStatement.setString(3, entity.getEmail());
         preparedStatement.setString(4, entity.getPassword());
         preparedStatement.setInt(5, DEFAULT_USER_ROLE_ID);
-
     }
 
     @Override
     protected void mapForUpdateStatement(PreparedStatement preparedStatement, User entity) throws SQLException {
-        mapForInsertStatement(preparedStatement,entity);
+        mapForInsertStatement(preparedStatement, entity);
         preparedStatement.setInt(6, entity.getId());
     }
 

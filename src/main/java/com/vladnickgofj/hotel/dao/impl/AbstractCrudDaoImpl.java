@@ -96,14 +96,9 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
         try (Connection connection = connector.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(findAllQuery)) {
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 Set<E> entities = new HashSet<>();
-                entities.add(mapResultSetToEntity(resultSet));
-//                while (resultSet.next()) {
-////                    int row = resultSet.getRow();
-////                    System.out.println(row);
-//                    entities.add(mapResultSetToEntity(resultSet));
-////                    resultSet.absolute(row);
-//                }
-                System.out.println("=============findAll==============");
+                while (resultSet.next()) {
+                    entities.add(mapResultSetToEntity(resultSet));
+                }
                 return new ArrayList<>(entities);
             }
         } catch (SQLException e) {

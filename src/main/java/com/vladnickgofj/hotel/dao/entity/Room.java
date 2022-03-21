@@ -32,13 +32,13 @@ public class Room {
         return hotelId;
     }
 
-    public Room(int id, int typeId, int numberOfBeds, int statusId, int price, int hotel_id) {
+    public Room(int id, int typeId, int numberOfBeds, int statusId, int price, int hotelId) {
         this.id = id;
         this.typeId = typeId;
         this.numberOfBeds = numberOfBeds;
         this.statusId = statusId;
         this.price = price;
-        this.hotelId = hotel_id;
+        this.hotelId = hotelId;
     }
 
     @Override

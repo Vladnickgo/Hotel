@@ -21,29 +21,29 @@ public class RoomDaoImpl extends AbstractCrudDaoImpl<Room> {
     protected Room mapResultSetToEntity(ResultSet resultSet) throws SQLException {
         Room room = null;
         while (resultSet.next()){
-            room=new Room(resultSet.getInt("room_id"),
-                    resultSet.getInt("type_id"),
-                    resultSet.getInt("number_of_beds"),
-                    resultSet.getInt("status_id"),
-                    resultSet.getInt("price"),
-                    resultSet.getInt("hotel_id"));
-            System.out.println("Room"+room);
+        room = new Room(resultSet.getInt("room_id"),
+                resultSet.getInt("type_id"),
+                resultSet.getInt("number_of_beds"),
+                resultSet.getInt("status_id"),
+                resultSet.getInt("price"),
+                resultSet.getInt("hotel_id"));
+        System.out.println("Room" + room);
         }
         return room;
     }
 
     @Override
     protected void mapForInsertStatement(PreparedStatement preparedStatement, Room entity) throws SQLException {
-        preparedStatement.setInt(1,entity.getTypeId());
-        preparedStatement.setInt(2,entity.getNumberOfBeds());
-        preparedStatement.setInt(3,entity.getStatusId());
-        preparedStatement.setInt(4,entity.getPrice());
-        preparedStatement.setInt(5,entity.getHotelId());
+        preparedStatement.setInt(1, entity.getTypeId());
+        preparedStatement.setInt(2, entity.getNumberOfBeds());
+        preparedStatement.setInt(3, entity.getStatusId());
+        preparedStatement.setInt(4, entity.getPrice());
+        preparedStatement.setInt(5, entity.getHotelId());
     }
 
     @Override
     protected void mapForUpdateStatement(PreparedStatement preparedStatement, Room entity) throws SQLException {
-        mapForInsertStatement(preparedStatement,entity);
-        preparedStatement.setInt(6,entity.getId());
+        mapForInsertStatement(preparedStatement, entity);
+        preparedStatement.setInt(6, entity.getId());
     }
 }

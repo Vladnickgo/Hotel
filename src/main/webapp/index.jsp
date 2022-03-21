@@ -20,10 +20,10 @@
 <h1>Сегодня <%= getFormattedDate() %>
 </h1>
 <br/>
-<a href="${pageContext.request.contextPath}/WEB-INF/View/login.jsp">Please log in</a>
+<a href="${pageContext.request.contextPath}/loginPage.jsp">Please log in</a>
 <br>
 <a href="${pageContext.request.contextPath}/exception.jsp">Exception</a>
 <br>
-
+<a href="user.jsp">Registration</a>
 </body>
 </html>
