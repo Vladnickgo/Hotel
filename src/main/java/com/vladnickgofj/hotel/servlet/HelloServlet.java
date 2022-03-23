@@ -20,10 +20,22 @@ import java.util.Objects;
 public class HelloServlet extends HttpServlet {
     private final UserService userService = new UserServiceImpl();
     private final UserServiceImpl userServiceImpl = new UserServiceImpl();
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String regExp = "^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
+        String pageName = req.getParameter("pageName");
+        System.out.println(pageName);
+        switch (pageName) {
+            case "signin":
+                doSignin(req, resp);
+                break;
+            case "login":
+                doLogin(req, resp);
+                break;
+        }
+    }
+
+    private void doSignin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String email = req.getParameter("email");
@@ -34,17 +46,14 @@ public class HelloServlet extends HttpServlet {
         req.setAttribute("email", email);
         String param = req.getParameter("option");
         req.setAttribute("message", param);
-        if (!email.matches(regExp)) {
-            req.setAttribute("message", "email is not correct");
-            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
-            return;
-        }
+        if (emailValidation(req, resp, email))
+            getServletContext().getRequestDispatcher("/signIn.jsp").forward(req, resp);
 
         if (!Objects.equals(password, confirmationPassword) || Objects.equals(password, "")) {
             // TODO: 03.03.2022 DO something
             // TODO: 03.03.2022 send msg "Password not Equal"
             req.setAttribute("confirmationPassword", "Password not Equal");
-            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/signIn.jsp").forward(req, resp);
             return;
         }
         UserDto userDto = new UserDto(1, firstName, lastName, email, password, confirmationPassword, Role.USER);
@@ -52,16 +61,42 @@ public class HelloServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/success.jsp").forward(req, resp);
     }
 
+    private boolean emailValidation(HttpServletRequest req, HttpServletResponse resp, String email) throws ServletException, IOException {
+        String regExp = "^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
+        if (!email.matches(regExp)) {
+            req.setAttribute("message", "email is not correct");
+            return true;
+        }
+        return false;
+    }
+
     //todo example
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
-        String firstName = req.getParameter("firstName");
-        String email = req.getParameter("email");
-        String param = req.getParameter("option");
-        req.setAttribute("email", email);
-        req.setAttribute("message", param);
-        getServletContext().getRequestDispatcher("/success.jsp").forward(req, resp);
-        userService.save(new UserDto(1,"1","1","asd@asd.asd","1","1",Role.USER));
 
+    }
+
+    private void doLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String email = req.getParameter("email");
+        String pass = req.getParameter("password");
+        UserDto byEmail = userService.findByEmail(email);
+        if (emailValidation(req, resp, email)) {
+            req.setAttribute("message", "Email is not correct");
+            getServletContext().getRequestDispatcher("/loginPage.jsp").forward(req, resp);
+        }
+//        if (email.equals(byEmail.getEmail())&&pass.equals(byEmail.getPassword())) {
+        req.setAttribute("firstName", byEmail.getFirstName());
+        req.setAttribute("lastName", byEmail.getLastName());
+        req.setAttribute("email", email);
+        req.setAttribute("password", byEmail.getPassword());
+        req.setAttribute("confirmationPassword", byEmail.getConfirmationPassword());
+        req.setAttribute("role", byEmail.getRole());
+
+        getServletContext().getRequestDispatcher("/userPage.jsp").forward(req, resp);
+//        }
+//        }else {
+//            req.setAttribute("message", "User is not found");
+//            getServletContext().getRequestDispatcher("/loginPage.jsp").forward(req, resp);
+//        }
     }
 }

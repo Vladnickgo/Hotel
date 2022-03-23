@@ -5,7 +5,7 @@
   Time: 11:21
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -66,25 +66,20 @@
     <div class="row text-center">
         <div class="col-4"></div>
         <div class="col-4">
-            <h3>User is added</h3><br>
-            <table>
-                <tr>
-                    <th>First name:</th>
-                    <td>${firstName}</td>
-                </tr>
-                <tr>
-                    <th>Last name:</th>
-                    <td>${lastName}</td>
-                </tr>
-                <tr>
-                    <th>Email:</th>
-                    <td>${email}</td>
-                </tr>
-            </table>
-            ${message}
+            <h3 class="mt-3">Address</h3>
+            Our address
+            <h3 class="mt-5">Telephones</h3>
+            +(380)99-876-56-32<br>
+            +(380)99-876-56-33<br>
+            +(380)99-876-56-34<br>
+            <h3 class="mt-5">Email</h3>
+            test@test.ua<br>
+            test@test.ua<br>
+            test@test.ua<br>
         </div>
         <div class="col-4"></div>
     </div>
 </div>
+
 </body>
 </html>

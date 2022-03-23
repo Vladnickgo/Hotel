@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Computer
-  Date: 19.03.2022
-  Time: 11:21
+  Date: 31.01.2022
+  Time: 11:30
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,9 +17,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
             crossorigin="anonymous"></script>
-    <title>LoginPage</title>
+    <title>User_Page</title>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light pb-2">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Hello Hotel</a>
@@ -53,30 +54,73 @@
 </nav>
 
 <div class="container mt-5">
-    <div class="row text-center">
+    <div class="row">
         <div class="col-4"></div>
         <div class="col-4" align="center">
-            <h1 class="mb-5">Login for users</h1>
-            <form action="hello-servlet" method="post" >
+            <h1 class="mb-5">User registration</h1>
+            <form action="hello-servlet" method="post">
                 <table>
                     <tr>
-                        <td>email</td>
-                        <td><input type="text" name="email"></td>
+                        <td>
+                            First Name<sup>*</sup>
+                        </td>
+                        <td>
+                            <input type="text" name="firstName" value=${firstName}><br>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Password</td>
-                        <td><input type="password"></td>
+                        <td>
+                            Last Name<sup>*</sup>
+                        </td>
+                        <td>
+                            <input type="text" name="lastName" value=${lastName}><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email<sup>*</sup>
+                        </td>
+                        <td>
+                            <input type="text" name="email" value=${email}><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Password<sup>*</sup>
+                        </td>
+                        <td>
+                            <input type="password" name="password"><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td pr-2>
+                            Password confirmation<sup>*</sup>
+                        </td>
+                        <td>
+                            <input type="password" name="confirmationPassword"><br>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value="Submit..."></td>
+                        <td>${confirmationPassword}
+                            ${message}</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td class="text-danger">${message}</td>
+                        <td>
+                            <label></label>
+                        </td>
+                        <td>
+                            <input type="submit" value="Submit...">
+                        </td>
                     </tr>
-
-                    <input type="text" name="pageName" value="login" hidden>
+                    <tr>
+                        <td class="text-muted">
+                            <sup>*</sup> - require fields
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <input type="text" name="pageName" value="signin" hidden>
                 </table>
             </form>
         </div>

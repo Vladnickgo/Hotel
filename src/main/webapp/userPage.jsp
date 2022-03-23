@@ -52,39 +52,35 @@
     </div>
 </nav>
 
-<div class="container mt-5">
+<div class="container mt-5 mb-5 pb-5">
     <div class="row text-center">
-        <div class="col-4"></div>
+        <div class="col-4">${email}</div>
         <div class="col-4">
-            <h1 class="mb-5">Contacts</h1>
+            <h1>User page</h1>
+        </div>
+        <div class="col-4">
+            ${firstName}<br>
+            ${lastName}<br>
+            ${email}<br>
+            ${password}<br>
+            ${confirmationPassword}<br>
+            ${role}<br>
+
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 text-center">
+            <h1 class="display-1"></h1>
         </div>
         <div class="col-4"></div>
     </div>
 </div>
 
-<div class="container mt-1">
-    <div class="row text-center">
-        <div class="col-4"></div>
-        <div class="col-4">
-            <h3>User is added</h3><br>
-            <table>
-                <tr>
-                    <th>First name:</th>
-                    <td>${firstName}</td>
-                </tr>
-                <tr>
-                    <th>Last name:</th>
-                    <td>${lastName}</td>
-                </tr>
-                <tr>
-                    <th>Email:</th>
-                    <td>${email}</td>
-                </tr>
-            </table>
-            ${message}
-        </div>
-        <div class="col-4"></div>
-    </div>
-</div>
+
 </body>
 </html>
+
