@@ -57,7 +57,7 @@
         <div class="col-4"></div>
         <div class="col-4" align="center">
             <h1 class="mb-5">Login for users</h1>
-            <form action="hello-servlet" method="post" >
+            <form action="hello-servlet" method="post">
                 <table>
                     <tr>
                         <td>email</td>
@@ -65,14 +65,13 @@
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input type="password"></td>
+                        <td><input type="password" name="password"></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><input type="submit" value="Submit..."></td>
                     </tr>
                     <tr>
-                        <td></td>
                         <td class="text-danger">${message}</td>
                     </tr>
 

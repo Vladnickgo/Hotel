@@ -84,19 +84,20 @@ public class HelloServlet extends HttpServlet {
             req.setAttribute("message", "Email is not correct");
             getServletContext().getRequestDispatcher("/loginPage.jsp").forward(req, resp);
         }
-//        if (email.equals(byEmail.getEmail())&&pass.equals(byEmail.getPassword())) {
+        if (email.equals(byEmail.getEmail())&&pass.equals(byEmail.getPassword())) {
         req.setAttribute("firstName", byEmail.getFirstName());
         req.setAttribute("lastName", byEmail.getLastName());
         req.setAttribute("email", email);
         req.setAttribute("password", byEmail.getPassword());
         req.setAttribute("confirmationPassword", byEmail.getConfirmationPassword());
         req.setAttribute("role", byEmail.getRole());
-
+        System.out.println("pass "+pass);
+        System.out.println("byEmail.getPassword()"+byEmail.getPassword());
         getServletContext().getRequestDispatcher("/userPage.jsp").forward(req, resp);
-//        }
-//        }else {
-//            req.setAttribute("message", "User is not found");
-//            getServletContext().getRequestDispatcher("/loginPage.jsp").forward(req, resp);
-//        }
+        }
+        else {
+            req.setAttribute("message", "Login/password is not correct");
+            getServletContext().getRequestDispatcher("/loginPage.jsp").forward(req, resp);
+        }
     }
 }
