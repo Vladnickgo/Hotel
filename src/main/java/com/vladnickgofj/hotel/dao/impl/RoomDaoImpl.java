@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class RoomDaoImpl extends AbstractCrudDaoImpl<Room> {
     private final static String INSERT_INTO = "INSERT INTO room(type_id, number_of_beds, status_id, price, hotel_id) VALUES (?,?,?,?,?)";
-    private static final String FIND_BY_ID = "SELECT * FROM users WHERE room_id=?";
+    private static final String FIND_BY_ID = "SELECT * FROM room WHERE room_id=?";
     private static final String FIND_ALL = "SELECT * FROM room";
     private static final String UPDATE_USER = "UPDATE room SET type_id=?, number_of_beds=?, status_id=?, price=?, hotel_id=? WHERE room_id=?";
 
@@ -19,17 +19,12 @@ public class RoomDaoImpl extends AbstractCrudDaoImpl<Room> {
 
     @Override
     protected Room mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        Room room = null;
-        while (resultSet.next()){
-        room = new Room(resultSet.getInt("room_id"),
+        return new Room(resultSet.getInt("room_id"),
                 resultSet.getInt("type_id"),
                 resultSet.getInt("number_of_beds"),
                 resultSet.getInt("status_id"),
                 resultSet.getInt("price"),
                 resultSet.getInt("hotel_id"));
-        System.out.println("Room" + room);
-        }
-        return room;
     }
 
     @Override

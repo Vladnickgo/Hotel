@@ -7,5 +7,4 @@ public class ValidatorErrorMessage {
     public static final String USER_IS_NULL_MESSAGE = "User is null.";
     public static final String FIRST_NAME_ERROR_MESSAGE = "First name is not valid.";
     public static final String LAST_NAME_ERROR_MESSAGE = "Last name is not valid.";
-
 }

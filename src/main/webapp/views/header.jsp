@@ -1,35 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Computer
-  Date: 30.03.2022
-  Time: 17:58
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--// Основные теги создания циклов, определения условий, вывода информации на страницу и т.д.--%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--// Теги для форматирования и интернационализации информации (i10n и i18n)--%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style type="text/css">
-        /*#content {*/
-        /*    width: 500px; !* Ширина слоя *!*/
-        /*    margin: 0 auto 50px; !* Выравнивание по центру *!*/
-        /*}*/
-        footer {
-            position: fixed; /* Фиксированное положение */
-            left: 0;
-            bottom: 0; /* Левый нижний угол */
-            padding: 10px; /* Поля вокруг текста */
-            background: #F8F9FA; /* Цвет фона */
-            color: darkgray; /* Цвет текста */
-            width: 100%; /* Ширина слоя */
-        }
-    </style>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -42,7 +17,7 @@
 </head>
 <f:setLocale value="${locale}"/>
 <f:setBundle var="bunCont" basename="resources"/>
-
+<%--<c:set var="pageName" value="index.jsp"/>--%>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light pb-2">
     <div class="container-fluid">
@@ -66,52 +41,28 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="loginPage.jsp">
-                        <f:message key="logout" bundle="${bunCont}"></f:message>
+                        <f:message key="login" bundle="${bunCont}"></f:message>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signIn.jsp">
+                        <f:message key="signin" bundle="${bunCont}"></f:message>
                     </a>
                 </li>
             </ul>
-
             <form class="d-flex" action="hello-servlet" method="get" onchange="submit()">
                 <select class="form-select" aria-label="Default select example" name="lang">
                     <option selected value="ua_UA" ${optionUkr}>укр</option>
                     <option value="en_US" ${optionEng}>eng</option>
                 </select>
-                <input type="text" name="pageName" value="/userPage.jsp" hidden>
+                <input type="text" hidden name="pageName" value="${pageName}" >
             </form>
         </div>
     </div>
 </nav>
 
-<div class="container mt-5 mb-5 pb-5">
-    <div class="row text-center">
-        <div class="col-4"></div>
-        <div class="col-4">
-            <h1>User page</h1>
-        </div>
-        <div class="col-4">
-            ${firstName}<br>
-            ${lastName}<br>
-            ${email}<br>
-            ${password}<br>
-            ${confirmationPassword}<br>
-            ${role}<br>
-
-        </div>
-    </div>
-</div>
-
-<div class="container mt-5 pt-5">
-    <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4 text-center">
-            <h1 class="display-1"></h1>
-        </div>
-        <div class="col-4"></div>
-    </div>
-</div>
-<footer>
-    Designed by Vladimir Golubkov, 2022
-</footer>
 </body>
 </html>
+
+
 
