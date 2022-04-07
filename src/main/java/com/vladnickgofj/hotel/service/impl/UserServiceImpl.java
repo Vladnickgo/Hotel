@@ -12,10 +12,18 @@ import com.vladnickgofj.hotel.validator.UserValidator;
 
 
 public class UserServiceImpl implements UserService {
-    private final HikariConnectionPool hikariConnectionPool = new HikariConnectionPool("bd-config");
-    private final UserDao userRepository = new UserDaoImpl(hikariConnectionPool);
-    private final Mapper<UserDto, User> mapper = new UserMapper();
-    private final UserValidator userValidator = new UserValidator();
+
+    private final HikariConnectionPool hikariConnectionPool;
+    private final UserDao userRepository;
+    private final Mapper<UserDto, User> mapper;
+    private final UserValidator userValidator;
+
+    public UserServiceImpl(HikariConnectionPool hikariConnectionPool, UserDao userRepository, Mapper<UserDto, User> mapper, UserValidator userValidator) {
+        this.hikariConnectionPool = hikariConnectionPool;
+        this.userRepository = userRepository;
+        this.mapper = mapper;
+        this.userValidator = userValidator;
+    }
 
     @Override
     public UserDto findByEmail(String email) {
@@ -32,6 +40,13 @@ public class UserServiceImpl implements UserService {
         });
         User user = mapper.mapDtoToEntity(userDto);
         userRepository.save(user);
+    }
+
+    public void register(UserDto userDto) {
+        userValidator.validate(userDto);
+        if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+            throw new RuntimeException("A user with this Email is already registered");
+        }
     }
 
 }

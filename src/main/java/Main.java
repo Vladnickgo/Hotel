@@ -1,4 +1,5 @@
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
+import com.vladnickgofj.hotel.context.ApplicationContextInjector;
 import com.vladnickgofj.hotel.dao.entity.Booking;
 import com.vladnickgofj.hotel.dao.entity.Role;
 import com.vladnickgofj.hotel.dao.entity.Room;
@@ -6,6 +7,7 @@ import com.vladnickgofj.hotel.dao.entity.User;
 import com.vladnickgofj.hotel.dao.impl.BookingDaoImpl;
 import com.vladnickgofj.hotel.dao.impl.RoomDaoImpl;
 import com.vladnickgofj.hotel.dao.impl.UserDaoImpl;
+import com.vladnickgofj.hotel.service.UserService;
 import com.vladnickgofj.hotel.service.impl.UserServiceImpl;
 import com.vladnickgofj.hotel.servlet.dto.UserDto;
 
@@ -22,7 +24,8 @@ public class Main {
 
         UserDaoImpl userDao = new UserDaoImpl(hikariConnectionPool);
         RoomDaoImpl roomDao = new RoomDaoImpl(hikariConnectionPool);
-        UserServiceImpl userService = new UserServiceImpl();
+        ApplicationContextInjector injector=ApplicationContextInjector.getInstance();
+        UserService userService = injector.getUserService();
         BookingDaoImpl bookingDao = new BookingDaoImpl(hikariConnectionPool);
 
 //        List<Room> all = roomDao.findAll();

@@ -2,7 +2,6 @@ package com.vladnickgofj.hotel.servlet;
 
 import com.vladnickgofj.hotel.dao.entity.Role;
 import com.vladnickgofj.hotel.service.UserService;
-import com.vladnickgofj.hotel.service.impl.UserServiceImpl;
 import com.vladnickgofj.hotel.servlet.dto.UserDto;
 
 import javax.servlet.ServletException;
@@ -16,15 +15,19 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-@WebServlet("/hello-servlet")
+@WebServlet("/hotel/servlet/HelloServlet")
 public class HelloServlet extends HttpServlet {
-    private final UserService userService = new UserServiceImpl();
+    UserService userService;
+
+    public HelloServlet(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String pageName = req.getParameter("pageName");
-        req.setAttribute("session",session);
+        req.setAttribute("session", session);
         System.out.println(pageName);
         switch (pageName) {
             case "signin":
@@ -75,48 +78,55 @@ public class HelloServlet extends HttpServlet {
     //todo example
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
-        String[] langArray = req.getParameter("lang").split("_");
-        String language = langArray[0];
-        String country = langArray[1];
-        Locale locale = new Locale(language, country);
         String pageName = req.getParameter("pageName");
+        String isLogin = req.getParameter("isLogin");
+        if (isLogin != null && isLogin.equals("on")) {
+            HttpSession session = req.getSession();
+            session.invalidate();
+//            resp.sendRedirect(req.getContextPath());
+            getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
         System.out.println(pageName);
-        HttpSession session = req.getSession();
-        session.setAttribute("lang", Objects.equals(language, "ua") ? "укр" : "eng");
-        session.setAttribute("optionUkr", Objects.equals(language, "ua") ? "selected" : "n");
-        session.setAttribute("optionEng", Objects.equals(language, "en") ? "selected" : "n");
-        session.setAttribute("country", locale.getDisplayCountry());
-        session.setAttribute("locale", locale);
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("resources", locale);
-        req.setAttribute("welcome", resourceBundle.getString("welcome"));
-        getServletContext().getRequestDispatcher(pageName).forward(req, resp);
+        if (req.getParameter("lang") != null) {
+            String[] langArray = req.getParameter("lang").split("_");
+            String language = langArray[0];
+            String country = langArray[1];
+            System.out.println(language);
+            Locale locale = new Locale(language, country);
+
+            HttpSession session = req.getSession();
+            session.setAttribute("lang", Objects.equals(language, "ua") ? "укр" : "eng");
+            session.setAttribute("optionUkr", Objects.equals(language, "ua") ? "selected" : "n");
+            session.setAttribute("optionEng", Objects.equals(language, "en") ? "selected" : "n");
+            session.setAttribute("country", locale.getDisplayCountry());
+            session.setAttribute("locale", locale);
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("resources", locale);
+            req.setAttribute("welcome", resourceBundle.getString("welcome"));
+            getServletContext().getRequestDispatcher(pageName).forward(req, resp);
+//            resp.sendRedirect(req.getContextPath() + pageName);
+        }
     }
 
     private void doLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String email = req.getParameter("email");
         String pass = req.getParameter("password");
+
+
         UserDto byEmail = userService.findByEmail(email);
         if (emailValidation(req, resp, email)) {
             req.setAttribute("message", "Email is not correct");
             getServletContext().getRequestDispatcher("/loginPage.jsp").forward(req, resp);
         }
         if (email.equals(byEmail.getEmail()) && pass.equals(byEmail.getPassword())) {
-//            req.setAttribute("firstName", byEmail.getFirstName());
-//            req.setAttribute("lastName", byEmail.getLastName());
-//            req.setAttribute("email", email);
-//            req.setAttribute("password", byEmail.getPassword());
-//            req.setAttribute("confirmationPassword", byEmail.getConfirmationPassword());
-//            req.setAttribute("role", byEmail.getRole());
-
-
             session.setAttribute("firstName", byEmail.getFirstName());
             session.setAttribute("lastName", byEmail.getLastName());
             session.setAttribute("email", email);
             session.setAttribute("password", byEmail.getPassword());
             session.setAttribute("confirmationPassword", byEmail.getConfirmationPassword());
             session.setAttribute("role", byEmail.getRole());
-
+            session.setAttribute("gmail", email);
+            session.setAttribute("isLogin", true);
             getServletContext().getRequestDispatcher("/userPage.jsp").forward(req, resp);
         } else {
             req.setAttribute("message", "Login/password is not correct");

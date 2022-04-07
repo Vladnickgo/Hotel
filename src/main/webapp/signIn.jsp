@@ -6,8 +6,9 @@
 <f:setBundle var="bunCont" basename="resources"/>
 <c:set var="pageName" value="/signIn.jsp" scope="session"/>
 <c:import url="views/header.jsp"/>
-Email:${email}
-Session:${gmail}
+Email:${email}<br>
+Session:${gmail}<br>
+<c:out value="${gmail}"/><br>
 <div class="container mt-5">
     <div class="row">
         <div class="col-4"></div>
@@ -15,7 +16,10 @@ Session:${gmail}
             <h1 class="mb-5">
                 <f:message key="userRegistration" bundle="${bunCont}"></f:message>
             </h1>
-            <form action="hello-servlet" method="post">
+            <form action="/user" method="post">
+                <label>
+                    <input name="command" value="register" hidden>
+                </label>
                 <table>
                     <tr>
                         <td>

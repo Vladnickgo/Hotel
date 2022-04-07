@@ -9,14 +9,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*" %>
-
 <f:setLocale value="${locale}"/>
 <f:setBundle var="bunCont" basename="resources"/>
+<c:set var="pageName" value="/about.jsp" scope="session"/>
 
-<c:set var="pageName" value="/aboutUs.jsp" scope="session"/>
-<c:import url="views/header.jsp"/>
-
-Email:${email}
+<c:if test="${isLogin==null}">
+    <c:import url="views/header.jsp"/>
+</c:if>
+<c:if test="${isLogin==true}">
+    <c:import url="views/customHeader.jsp"/>
+</c:if>
+<c:out value="${gmail}"/><br>
 <body>
 <div class="container mt-5">
     <div class="row text-center">
