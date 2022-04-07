@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-@WebServlet("/hotel/servlet/HelloServlet")
+//@WebServlet("/hotel/servlet/HelloServlet")
 public class HelloServlet extends HttpServlet {
     UserService userService;
 

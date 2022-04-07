@@ -16,6 +16,9 @@ Email:${email}
                 <f:message key="logForUsers" bundle="${bunCont}"></f:message>
             </h1>
             <form action="hello-servlet" method="post">
+                <label>
+                    <input name="command" value="login" hidden>
+                </label>
                 <table>
                     <tr>
                         <td>email</td>

@@ -2,6 +2,7 @@ package com.vladnickgofj.hotel.controller;
 
 import com.vladnickgofj.hotel.context.ApplicationContextInjector;
 import com.vladnickgofj.hotel.controller.command.Command;
+import com.vladnickgofj.hotel.controller.command.user.RegisterCommand;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -13,28 +14,29 @@ import java.util.Map;
 
 public abstract class AbstractServlet extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(AbstractServlet.class);
+    public static final String NOT_VALID_PATH = "Not valid path";
+
     private final Map<String, Command> commandNameToCommand;
     private final Command defaultCommand;
 
-    AbstractServlet(String command, String defaultCommand) {
+    AbstractServlet(String path, String defaultCommand) {
         ApplicationContextInjector injector = ApplicationContextInjector.getInstance();
-        switch (command) {
+        switch (path) {
       /*      case "home": {
                 this.commandNameToCommand = injector.getHomeCommandNameToCommand();
                 break;
             }*/
             case "user": {
-                this.commandNameToCommand =injector.getUserCommands();
+                this.commandNameToCommand = injector.getUserCommands();
                 break;
             }
             default: {
-                LOGGER.error("Not valid Command");
-                throw new IllegalArgumentException("Not valid Command");
+                LOGGER.error(NOT_VALID_PATH);
+                throw new IllegalArgumentException(NOT_VALID_PATH);
             }
 
         }
         this.defaultCommand = commandNameToCommand.get(defaultCommand);
-
     }
 
     @Override
@@ -48,9 +50,9 @@ public abstract class AbstractServlet extends HttpServlet {
     }
 
     private void forward(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String commandName = req.getParameter("command"); // register
-        Command orDefault = commandNameToCommand.getOrDefault(commandName, defaultCommand); //RegisterCommand
-        final String page = orDefault.execute(req);
+        final String commandName = req.getParameter("command");
+        Command command = commandNameToCommand.getOrDefault(commandName, defaultCommand);
+        final String page = command.execute(req);
         req.getRequestDispatcher(page).forward(req, resp);
     }
 }

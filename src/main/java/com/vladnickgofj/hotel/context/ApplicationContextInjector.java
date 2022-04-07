@@ -2,6 +2,8 @@ package com.vladnickgofj.hotel.context;
 
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
 import com.vladnickgofj.hotel.controller.command.Command;
+import com.vladnickgofj.hotel.controller.command.user.DefaultCommand;
+import com.vladnickgofj.hotel.controller.command.user.LoginCommand;
 import com.vladnickgofj.hotel.controller.command.user.RegisterCommand;
 import com.vladnickgofj.hotel.dao.UserDao;
 import com.vladnickgofj.hotel.dao.entity.User;
@@ -30,6 +32,8 @@ public final class ApplicationContextInjector {
     private static final UserService USER_SERVICE = new UserServiceImpl(HIKARI_CONNECTION_POOL, USER_DAO, USER_MAPPER, USER_VALIDATOR);
 
     private static final Command REGISTER_COMMAND =new RegisterCommand(USER_SERVICE);
+    private static final Command LOGIN_COMMAND =new LoginCommand();
+    private static final Command DEFAULT_COMMAND =new DefaultCommand();
 
     private static final Map<String, Command> USER_COMMAND_NAME_TO_COMMAND = initUserCommand();
 
@@ -46,6 +50,8 @@ public final class ApplicationContextInjector {
     private static Map<String,Command> initUserCommand(){
         Map<String,Command> userCommandNameToCommand=new HashMap<>();
         userCommandNameToCommand.put("register",REGISTER_COMMAND);
+        userCommandNameToCommand.put("login",LOGIN_COMMAND);
+        userCommandNameToCommand.put("defaultCommand",DEFAULT_COMMAND);
 
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }

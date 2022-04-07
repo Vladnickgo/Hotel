@@ -16,7 +16,7 @@ Session:${gmail}<br>
             <h1 class="mb-5">
                 <f:message key="userRegistration" bundle="${bunCont}"></f:message>
             </h1>
-            <form action="/user" method="post">
+            <form method="post" action="/user" >
                 <label>
                     <input name="command" value="register" hidden>
                 </label>
@@ -81,7 +81,6 @@ Session:${gmail}<br>
                         <td>
                         </td>
                     </tr>
-                    <input type="text" name="pageName" value="signin" hidden>
                 </table>
             </form>
         </div>

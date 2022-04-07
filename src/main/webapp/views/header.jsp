@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*" %>
-<html>
+<html lang="${param.language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,8 +15,8 @@
             crossorigin="anonymous"></script>
     <title>HomePage</title>
 </head>
-<f:setLocale value="${locale}"/>
-<f:setBundle var="bunCont" basename="resources"/>
+<f:setLocale value="${sessionScope.language}"/>
+<f:setBundle basename="resources"/>
 <c:set var="pageName" value="/index.jsp"/>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light pb-2">
@@ -26,38 +26,39 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="index.jsp">
-                        <f:message key="home" bundle="${bunCont}"></f:message>
+                        <f:message key="home"></f:message>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="aboutUs.jsp">
-                        <f:message key="about" bundle="${bunCont}"></f:message>
+                        <f:message key="about"></f:message>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contacts.jsp">
-                        <f:message key="contacts" bundle="${bunCont}"></f:message>
+                        <f:message key="contacts"></f:message>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="loginPage.jsp">
-                        <f:message key="login" bundle="${bunCont}"></f:message>
+                        <f:message key="login"></f:message>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signIn.jsp">
-                        <f:message key="signin" bundle="${bunCont}"></f:message>
+                        <f:message key="signin"></f:message>
                     </a>
                 </li>
             </ul>
-            <form class="d-flex" action="/hotel/servlet/HelloServlet" method="get" onchange="submit()">
-                <select class="form-select" aria-label="Default select example" name="lang">
-                    <option selected value="ua_UA" ${optionUkr}>укр</option>
-                    <option value="en_US" ${optionEng}>eng</option>
+            <form class="d-flex" method="post" onchange="submit()">
+                <select class=" form-control select-size" id="language" name="language"
+                        style="width: 120px;">
+                    <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                    <option value="ua" ${language == 'ua' ? 'selected' : ''}>Україньська</option>
                 </select>
-                <input type="text" hidden name="pageName" value="${pageName}" >
             </form>
         </div>
+        <p>Language:${language}</p>
     </div>
 </nav>
 

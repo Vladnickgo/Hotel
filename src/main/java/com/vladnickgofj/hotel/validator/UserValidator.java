@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import static com.vladnickgofj.hotel.validator.Patterns.*;
 import static com.vladnickgofj.hotel.validator.ValidatorErrorMessage.*;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class UserValidator implements Validator<UserDto> {
 

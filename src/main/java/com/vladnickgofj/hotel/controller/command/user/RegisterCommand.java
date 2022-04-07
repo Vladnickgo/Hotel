@@ -38,7 +38,7 @@ public class RegisterCommand implements Command {
         }catch (Exception e){
 
         }
-        return PagesConstant.REGISTRATION_PAGE;
+        return PagesConstant.LOGIN_PAGE;
     }
 
     private boolean emailValidation(HttpServletRequest req, String email) throws ServletException, IOException {
