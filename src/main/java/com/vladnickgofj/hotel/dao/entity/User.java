@@ -7,7 +7,7 @@ public class User {
     private final String firstName;
     private final String lastName;
     private final String email;
-    private final String password;
+    private String password;
     private final Role role;
 
     private User(Builder builder) {
@@ -72,9 +72,7 @@ public class User {
     }
 
 
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id; }
 
     public String getFirstName() {
         return firstName;
@@ -94,6 +92,10 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    public void setPassword(String password){
+        this.password=password;
     }
 
     @Override

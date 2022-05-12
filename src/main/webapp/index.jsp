@@ -1,25 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Computer
-  Date: 30.03.2022
-  Time: 17:58
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--<%@ page import="java.util.*" %>--%>
-<f:setLocale value="${locale}"/>
+
+<f:setLocale value="${sessionScope.language}"/>
+
 <f:setBundle var="bunCont" basename="resources"/>
-<c:set var="pageName" value="/index.jsp" scope="session"/>
+
+<c:set var="Title" scope="request" value="Homepage"/>
+
+<c:import url="views/head.jsp"/>
+
+<body>
+
 <c:import url="views/header.jsp"/>
-<%--<c:if test="${isLogin==null}">--%>
-<%--    <c:import url="views/header.jsp"/>--%>
-<%--</c:if>--%>
-<%--<c:if test="${isLogin==true}">--%>
-<%--    <c:import url="views/customHeader.jsp"/>--%>
-<%--</c:if>--%>
-<%--<c:out value="${gmail}"/><br>--%>
 
 <div class="container mt-5 mb-5 pb-5">
     <div class="row text-center">
@@ -35,7 +30,6 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4 text-center">
-            <%--            <h1 class="display-1">Welcome*</h1>--%>
             <h1 class="display-1"><f:message key="welcome" bundle="${bunCont}"></f:message></h1>
             <h2 class="mt-5">☆ ☆ ☆ ☆ ☆</h2>
         </div>

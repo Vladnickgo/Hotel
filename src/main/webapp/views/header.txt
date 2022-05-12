@@ -9,43 +9,35 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 ">
                 <a class="navbar-brand" href="#">{Hello Hotel} </a>
-
-                <form class="d-flex" action="home" method="get">
-                    <button class="btn btn-link" name="command" value="homePage" type="submit">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.jsp">
                         <f:message key="home"></f:message>
-                    </button>
-                    <button class="btn btn-link" name="command" value="about" type="submit">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/aboutUs.jsp">
                         <f:message key="about"></f:message>
-                    </button>
-                    <button class="btn btn-link" name="command" value="contacts" type="submit">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contacts.jsp">
                         <f:message key="contacts"></f:message>
-                    </button>
-                </form>
-
-
+                    </a>
+                </li>
+<%--                <c:if test="${isLogin != true}">--%>
                 <c:if test="${user == null}">
-                    <%--                    <li class="nav-item">--%>
-                    <%--                        <a class="nav-link" href="/loginPage.jsp">--%>
-                    <%--                            <f:message key="login"></f:message>--%>
-                    <%--                        </a>--%>
-                    <%--                    </li>--%>
-                    <%--                    <li class="nav-item">--%>
-                    <%--                        <a class="nav-link" href="/signIn.jsp">--%>
-                    <%--                            <f:message key="signin"></f:message>--%>
-                    <%--                        </a>--%>
-                    <%--                    </li>--%>
-                    <form class="d-flex" action="home" method="post">
-                        <button class="btn btn-link" name="command" value="login" type="submit">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/loginPage.jsp">
                             <f:message key="login"></f:message>
-                        </button>
-                        <button class="btn btn-link" name="command" value="register" type="submit">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signIn.jsp">
                             <f:message key="signin"></f:message>
-                        </button>
-                    </form>
-
-
+                        </a>
+                    </li>
                 </c:if>
-                <%--                <c:if test="${isLogin == true}">--%>
+<%--                <c:if test="${isLogin == true}">--%>
                 <c:if test="${user != null}">
                     <li class="nav-item ">
                         <a>

@@ -20,21 +20,24 @@ public class BookingDaoImpl extends AbstractCrudDaoImpl<Booking> {
 
     @Override
     protected Booking mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return new Booking(
-                resultSet.getInt("booking_id"),
-                resultSet.getDate("check_in"),
-                resultSet.getDate("check_out"),
-                resultSet.getInt("room_id"),
-                resultSet.getInt("night"),
-                resultSet.getDate("book_time"),
-                resultSet.getInt("booking_status_id"),
-                resultSet.getInt("user_id"));
+        return Booking.newBuilder()
+                .id(resultSet.getInt("booking_id"))
+                .checkIn(resultSet.getDate("check_in"))
+                .checkOut(resultSet.getDate("check_out"))
+                .roomId(resultSet.getInt("room_id"))
+                .night(resultSet.getInt("night"))
+                .bookTime(resultSet.getDate("book_time"))
+                .bookingStatusId(resultSet.getInt("booking_status_id"))
+                .usersId(resultSet.getInt("user_id"))
+                .build();
+
+
     }
 
     @Override
     protected void mapForInsertStatement(PreparedStatement preparedStatement, Booking entity) throws SQLException {
-        preparedStatement.setDate(1, (Date) entity.getCheck_in());
-        preparedStatement.setDate(2, (Date) entity.getCheck_out());
+        preparedStatement.setDate(1, (Date) entity.getCheckIn());
+        preparedStatement.setDate(2, (Date) entity.getCheckOut());
         preparedStatement.setInt(3, entity.getRoomId());
         preparedStatement.setInt(4, entity.getNight());
         preparedStatement.setDate(5, (Date) entity.getBookTime());

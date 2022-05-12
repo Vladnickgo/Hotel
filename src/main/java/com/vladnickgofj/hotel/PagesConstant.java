@@ -5,5 +5,8 @@ public final class PagesConstant {
     public static final String USER_DEFAULT_PAGE = "/index.jsp";
     public static final String HOME_PAGE = "/index.jsp";
     public static final String LOGIN_PAGE = "/loginPage.jsp";
-
+    public static final String NO_USER_PAGE = "/userNotFoundPage.jsp";
+    public static final String USER_PROFILE = "/userProfile.jsp";
+    public static final String ABOUT_PAGE = "/aboutUs.jsp";
+    public static final String CONTACTS_PAGE = "/contacts.jsp";
 }

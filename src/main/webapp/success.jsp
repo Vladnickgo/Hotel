@@ -28,7 +28,7 @@
             crossorigin="anonymous"></script>
     <title>Sign In Page</title>
 </head>
-<f:setLocale value="${locale}"/>
+<f:setLocale value="${sessionScope.language}"/>
 <f:setBundle var="bunCont" basename="resources"/>
 
 <body>

@@ -1,4 +1,4 @@
-package com.vladnickgofj.hotel.servlet.dto;
+package com.vladnickgofj.hotel.controller.dto;
 
 import com.vladnickgofj.hotel.dao.entity.Role;
 
@@ -47,5 +47,18 @@ public class UserDto {
 
     public Role getRole() {
         return role;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmationPassword='" + confirmationPassword + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

@@ -1,26 +1,21 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Computer
-  Date: 30.03.2022
-  Time: 17:58
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.util.*" %>
-<f:setLocale value="${locale}"/>
-<f:setBundle var="bunCont" basename="resources"/>
-<c:set var="pageName" value="/about.jsp" scope="session"/>
+<%@ page contentType="text/html;charset=UTF-8"%>
 
-<c:if test="${isLogin==null}">
-    <c:import url="views/header.jsp"/>
-</c:if>
-<c:if test="${isLogin==true}">
-    <c:import url="views/customHeader.jsp"/>
-</c:if>
-<c:out value="${gmail}"/><br>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<f:setLocale value="${sessionScope.language}"/>
+
+<f:setBundle var="bunCont" basename="resources"/>
+
+<c:set var="Title" scope="request" value="AboutUs"/>
+
+<c:import url="views/head.jsp"/>
+
 <body>
+
+<c:import url="views/header.jsp"/>
+
 <div class="container mt-5">
     <div class="row text-center">
         <div class="col-4"></div>
@@ -81,9 +76,9 @@
             quisquam quo quod repellat reprehenderit repudiandae rerum sequi sint voluptates voluptatibus. Aperiam
             commodi impedit nesciunt nobis omnis rem repellat sed veritatis vero. Eius eum inventore odio qui soluta?
         </div>
-        <div class="col-3"></div>
+        <div class="col-3">    <a href="images/4.png">img</a></div>
     </div>
 </div>
-<c:import url="views/footer.jsp"/>
+    <c:import url="views/footer.jsp"/>
 </body>
 </html>

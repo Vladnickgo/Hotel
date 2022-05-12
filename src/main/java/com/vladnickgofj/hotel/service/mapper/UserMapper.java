@@ -1,13 +1,14 @@
 package com.vladnickgofj.hotel.service.mapper;
 
 import com.vladnickgofj.hotel.dao.entity.User;
-import com.vladnickgofj.hotel.servlet.dto.UserDto;
+import com.vladnickgofj.hotel.controller.dto.UserDto;
 
 public class UserMapper implements Mapper<UserDto, User> {
 
     @Override
     public User mapDtoToEntity(UserDto userDto) {
         return User.newBuilder()
+                .id(userDto.getId())
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
                 .email(userDto.getEmail())

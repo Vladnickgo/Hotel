@@ -1,14 +1,21 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.util.*" %>
-<f:setLocale value="${locale}"/>
+
+<f:setLocale value="${sessionScope.language}"/>
+
 <f:setBundle var="bunCont" basename="resources"/>
-<c:set var="pageName" value="/signIn.jsp" scope="session"/>
+
+<c:set var="Title" scope="request" value="SignIn"/>
+
+<c:import url="views/head.jsp"/>
+
+<body>
+
 <c:import url="views/header.jsp"/>
-Email:${email}<br>
-Session:${gmail}<br>
-<c:out value="${gmail}"/><br>
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-4"></div>
@@ -50,7 +57,7 @@ Session:${gmail}<br>
                             <f:message key="password" bundle="${bunCont}"></f:message><sup>*</sup>
                         </td>
                         <td>
-                            <input type="password" name="password"><br>
+                            <input type="text" name="password"><br>
                         </td>
                     </tr>
                     <tr>
@@ -58,7 +65,7 @@ Session:${gmail}<br>
                             <f:message key="passwordConfirmation" bundle="${bunCont}"></f:message><sup>*</sup>
                         </td>
                         <td>
-                            <input type="password" name="confirmationPassword"><br>
+                            <input type="text" name="confirmationPassword"><br>
                         </td>
                     </tr>
                     <tr>

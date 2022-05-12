@@ -3,11 +3,9 @@ package com.vladnickgofj.hotel.service.impl;
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
 import com.vladnickgofj.hotel.dao.UserDao;
 import com.vladnickgofj.hotel.dao.entity.User;
-import com.vladnickgofj.hotel.dao.impl.UserDaoImpl;
 import com.vladnickgofj.hotel.service.UserService;
 import com.vladnickgofj.hotel.service.mapper.Mapper;
-import com.vladnickgofj.hotel.service.mapper.UserMapper;
-import com.vladnickgofj.hotel.servlet.dto.UserDto;
+import com.vladnickgofj.hotel.controller.dto.UserDto;
 import com.vladnickgofj.hotel.validator.UserValidator;
 
 
@@ -34,14 +32,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserDto userDto) {
+        System.out.println("Hello from UserServiceImpl, method save()");
         userValidator.validate(userDto);
         userRepository.findByEmail(userDto.getEmail()).ifPresent(err -> {
             throw new RuntimeException("Email is not correct");
         });
         User user = mapper.mapDtoToEntity(userDto);
         userRepository.save(user);
+
     }
 
+    @Override
     public void register(UserDto userDto) {
         userValidator.validate(userDto);
         if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {

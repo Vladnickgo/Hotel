@@ -1,6 +1,6 @@
 package com.vladnickgofj.hotel.validator;
 
-import com.vladnickgofj.hotel.servlet.dto.UserDto;
+import com.vladnickgofj.hotel.controller.dto.UserDto;
 
 import java.util.Optional;
 import java.util.function.Function;

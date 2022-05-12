@@ -18,6 +18,12 @@
         <apache.commons.version>3.12.0</apache.commons.version>
         <msq.connector.java>8.0.27</msq.connector.java>
         <hikari.cp>5.0.1</hikari.cp>
+        <javax.servlet.api>3.1.0</javax.servlet.api>
+        <tomcat.embed.core>9.0.58</tomcat.embed.core>
+        <json.simple>1.1.1</json.simple>
+        <jstl.ver>1.2</jstl.ver>
+        <log4j.ver>1.2.17</log4j.ver>
+        <log4j.core>2.17.2</log4j.core>
     </properties>
 
     <dependencies>
@@ -35,14 +41,9 @@
             <version>${hikari.cp}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.17.1</version>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${javax.servlet.api}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -61,30 +62,29 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.58</version>
+            <version>${tomcat.embed.core}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
+            <version>${json.simple}</version>
         </dependency>
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.ver}</version>
         </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.12</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache.commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.ver}</version>
         </dependency>
     </dependencies>
 

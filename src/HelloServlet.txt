@@ -2,7 +2,7 @@ package com.vladnickgofj.hotel.servlet;
 
 import com.vladnickgofj.hotel.dao.entity.Role;
 import com.vladnickgofj.hotel.service.UserService;
-import com.vladnickgofj.hotel.servlet.dto.UserDto;
+import com.vladnickgofj.hotel.controller.dto.UserDto;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-//@WebServlet("/hotel/servlet/HelloServlet")
+//@WebServlet("hello-servlet")
 public class HelloServlet extends HttpServlet {
     UserService userService;
 

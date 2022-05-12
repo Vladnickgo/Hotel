@@ -1,23 +1,27 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<f:setLocale value="${sessionScope.language}"/>
-<f:setBundle basename="resources"/>
-<c:set var="pageName" value="/contacts.jsp" scope="session"/>
+<%@ page contentType="text/html;charset=UTF-8"%>
 
-<c:if test="${isLogin==null}">
-    <c:import url="views/header.jsp"/>
-</c:if>
-<c:if test="${isLogin==true}">
-    <c:import url="views/customHeader.jsp"/>
-</c:if>
-<c:out value="${gmail}"/><br>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<f:setLocale value="${sessionScope.language}"/>
+
+<f:setBundle var="bunCont" basename="resources"/>
+
+<c:set var="Title" scope="request" value="Contacts"/>
+
+<c:import url="views/head.jsp"/>
+
+<body>
+
+<c:import url="views/header.jsp"/>
+
 <div class="container mt-5">
     <div class="row text-center">
         <div class="col-4"></div>
         <div class="col-4">
             <h1 class="mb-5">
-                <f:message key="contacts"> </f:message>
+                <f:message key="contacts" bundle="${bunCont}"> </f:message>
             </h1>
         </div>
         <div class="col-4"></div>
@@ -29,11 +33,11 @@
         <div class="col-4"></div>
         <div class="col-4">
             <h3 class="mt-3">
-                <f:message key="address"> </f:message>
+                <f:message key="address" bundle="${bunCont}"> </f:message>
             </h3>
             Our address
             <h3 class="mt-5">
-                <f:message key="telephones"> </f:message>
+                <f:message key="telephones" bundle="${bunCont}"> </f:message>
             </h3>
             +(380)99-876-56-32<br>
             +(380)99-876-56-33<br>
