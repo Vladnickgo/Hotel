@@ -29,7 +29,6 @@ public class HomeSecurityFilter implements Filter {
         User user = (User) req.getSession().getAttribute("user");
         String command = req.getParameter("command");
         if ((user == null || !Role.USER.equals(user.getRole())) && command.equals("show-profile")) {
-//            req.getRequestDispatcher(PagesConstant.NOT_AUTHORIZED_USER_PAGE).forward(request, response);
             resp.sendRedirect(PagesConstant.NOT_AUTHORIZED_USER_PAGE);
         } else {
             chain.doFilter(req, response);

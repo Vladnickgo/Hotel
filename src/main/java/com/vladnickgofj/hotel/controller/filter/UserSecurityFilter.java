@@ -17,9 +17,8 @@ import java.util.Enumeration;
                 DispatcherType.REQUEST,
                 DispatcherType.FORWARD
         })
-//@WebFilter("/*")
 public class UserSecurityFilter implements Filter {
-    private static Logger LOGGER = Logger.getLogger(UserSecurityFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(UserSecurityFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

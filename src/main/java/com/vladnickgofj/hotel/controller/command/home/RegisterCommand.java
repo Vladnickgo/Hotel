@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class RegisterCommand implements Command {
-    private UserService userService;
+    private final UserService userService;
 
     public RegisterCommand(UserService userService) {
         this.userService = userService;
@@ -46,7 +46,6 @@ public class RegisterCommand implements Command {
         }catch (Exception e){
             System.out.println("User isn't saved");
         }
-//        userService.save(userDto);
         return PagesConstant.LOGIN_PAGE;
     }
 

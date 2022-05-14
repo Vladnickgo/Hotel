@@ -54,17 +54,14 @@ public final class ApplicationContextInjector {
 
     private static final Map<String, Command> HOME_COMMAND_NAME_TO_COMMAND = initHomeCommand();
 
-
     //private static final RoomService ROOM_SERVICE=new RoomServiceImpl();
-    // TODO: 04.04.2022  create RegisterCommand
-    // TODO: 04.04.2022 to create map with userCommands
+
     private static ApplicationContextInjector applicationContextInjector;
 
     private ApplicationContextInjector() {
 
     }
 
-    // TODO: 04.04.2022 create methods for init map userCommands
     private static Map<String, Command> initUserCommand() {
         Map<String, Command> userCommandNameToCommand = new HashMap<>();
         userCommandNameToCommand.put("logout", LOGOUT_COMMAND);

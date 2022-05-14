@@ -19,24 +19,20 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements com.vladni
     private static final String FIND_BY_EMAIL = "SELECT * FROM users WHERE email=?";
     private static final int DEFAULT_USER_ROLE_ID = 2;
 
-    //        protected UserDaoImpl(HikariConnectionPool connector, String saveQuery, String findByIdQuery, String findAllQuery, String updateQuery) {
-//        super(connector, saveQuery, findByIdQuery, findAllQuery, updateQuery);
-//    }
-//
     public UserDaoImpl(HikariConnectionPool connector) {
         super(connector, INSERT_QUERY, FIND_BY_ID, FIND_ALL, UPDATE_USER);
     }
 
     @Override
     protected User mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-            return User.newBuilder()
-                    .id(resultSet.getInt("user_id"))
-                    .firstName(resultSet.getString("first_name"))
-                    .lastName(resultSet.getString("last_name"))
-                    .email(resultSet.getString("email"))
-                    .password(resultSet.getString("password"))
-                    .role(Role.getRole(resultSet.getInt("role_id")))
-                    .build();
+        return User.newBuilder()
+                .id(resultSet.getInt("user_id"))
+                .firstName(resultSet.getString("first_name"))
+                .lastName(resultSet.getString("last_name"))
+                .email(resultSet.getString("email"))
+                .password(resultSet.getString("password"))
+                .role(Role.getRole(resultSet.getInt("role_id")))
+                .build();
     }
 
     @Override

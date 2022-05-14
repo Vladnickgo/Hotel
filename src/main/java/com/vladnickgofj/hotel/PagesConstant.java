@@ -9,5 +9,5 @@ public final class PagesConstant {
     public static final String USER_PROFILE = "/userProfile.jsp";
     public static final String ABOUT_PAGE = "/aboutUs.jsp";
     public static final String CONTACTS_PAGE = "/contacts.jsp";
-    public static final String NOT_AUTHORIZED_USER_PAGE="/userNA.jsp";
+    public static final String NOT_AUTHORIZED_USER_PAGE="/userNa.jsp";
 }
