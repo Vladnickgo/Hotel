@@ -46,6 +46,10 @@ public final class ApplicationContextInjector {
 
     private static final Command CONTACTS_COMMAND = new ContactsPageCommand();
 
+    private static final Command LOGIN_PAGE_COMMAND = new LoginPageCommand();
+
+    private static final Command REGISTER_PAGE_COMMAND = new RegisterPageCommand();
+
     private static final Map<String, Command> USER_COMMAND_NAME_TO_COMMAND = initUserCommand();
 
     private static final Map<String, Command> HOME_COMMAND_NAME_TO_COMMAND = initHomeCommand();
@@ -64,7 +68,7 @@ public final class ApplicationContextInjector {
     private static Map<String, Command> initUserCommand() {
         Map<String, Command> userCommandNameToCommand = new HashMap<>();
         userCommandNameToCommand.put("logout", LOGOUT_COMMAND);
-        userCommandNameToCommand.put("show-profile", SHOW_PROFILE_COMMAND);
+//        userCommandNameToCommand.put("show-profile", SHOW_PROFILE_COMMAND);
         userCommandNameToCommand.put("defaultCommand", DEFAULT_COMMAND);
 
         return Collections.unmodifiableMap(userCommandNameToCommand);
@@ -74,10 +78,13 @@ public final class ApplicationContextInjector {
     private static Map<String, Command> initHomeCommand() {
         Map<String, Command> homeCommandNameToCommand = new HashMap<>();
         homeCommandNameToCommand.put("homePage", HOME_COMMAND);
-        homeCommandNameToCommand.put("about", ABOUT_COMMAND);
-        homeCommandNameToCommand.put("contacts", CONTACTS_COMMAND);
+        homeCommandNameToCommand.put("aboutPage", ABOUT_COMMAND);
+        homeCommandNameToCommand.put("contactsPage", CONTACTS_COMMAND);
+        homeCommandNameToCommand.put("loginPage", LOGIN_PAGE_COMMAND);
+        homeCommandNameToCommand.put("registerPage", REGISTER_PAGE_COMMAND);
         homeCommandNameToCommand.put("register", REGISTER_COMMAND);
         homeCommandNameToCommand.put("login", LOGIN_COMMAND);
+        homeCommandNameToCommand.put("show-profile", SHOW_PROFILE_COMMAND);
         homeCommandNameToCommand.put("defaultCommand", DEFAULT_COMMAND);
 
         return Collections.unmodifiableMap(homeCommandNameToCommand);

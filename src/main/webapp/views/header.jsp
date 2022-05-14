@@ -11,48 +11,37 @@
                 <a class="navbar-brand" href="#">{Hello Hotel} </a>
 
                 <form class="d-flex" action="home" method="get">
-                    <button class="btn btn-link" name="command" value="homePage" type="submit">
+                    <button class="btn btn-outline-primary" name="command" value="homePage" type="submit">
                         <f:message key="home"></f:message>
                     </button>
-                    <button class="btn btn-link" name="command" value="about" type="submit">
+                    <button class="btn btn-outline-primary" name="command" value="aboutPage" type="submit">
                         <f:message key="about"></f:message>
                     </button>
-                    <button class="btn btn-link" name="command" value="contacts" type="submit">
+                    <button class="btn btn-outline-primary" name="command" value="contactsPage" type="submit">
                         <f:message key="contacts"></f:message>
                     </button>
-                </form>
-
-
-                <c:if test="${user == null}">
-                    <%--                    <li class="nav-item">--%>
-                    <%--                        <a class="nav-link" href="/loginPage.jsp">--%>
-                    <%--                            <f:message key="login"></f:message>--%>
-                    <%--                        </a>--%>
-                    <%--                    </li>--%>
-                    <%--                    <li class="nav-item">--%>
-                    <%--                        <a class="nav-link" href="/signIn.jsp">--%>
-                    <%--                            <f:message key="signin"></f:message>--%>
-                    <%--                        </a>--%>
-                    <%--                    </li>--%>
-                    <form class="d-flex" action="home" method="post">
-                        <button class="btn btn-link" name="command" value="login" type="submit">
+                    <c:if test="${user == null}">
+                        <button class="btn btn-outline-primary" name="command" value="loginPage" type="submit">
                             <f:message key="login"></f:message>
                         </button>
-                        <button class="btn btn-link" name="command" value="register" type="submit">
+                        <button class="btn btn-outline-primary" name="command" value="registerPage" type="submit">
                             <f:message key="signin"></f:message>
                         </button>
-                    </form>
-
-
-                </c:if>
-                <%--                <c:if test="${isLogin == true}">--%>
+                    </c:if>
+                    <c:if test="${user != null}">
+                        <button class="btn btn-outline-primary" name="command" value="show-profile"
+                                type="submit">
+                            <f:message key="cabinet"></f:message>
+                        </button>
+                    </c:if>
+                </form>
                 <c:if test="${user != null}">
                     <li class="nav-item ">
                         <a>
                             <form class="d-flex" action="user" method="post">
-                                <input type="text" name="command" value="logout" hidden>
-                                <button class="btn btn-primary" type="submit"><f:message
-                                        key="logout"></f:message></button>
+                                <button class="btn btn-primary" name="command" value="logout" type="submit">
+                                    <f:message key="logout"></f:message>
+                                </button>
                             </form>
                         </a>
                     </li>

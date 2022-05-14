@@ -23,7 +23,7 @@
             <h1 class="mb-5">
                 <f:message key="userRegistration" bundle="${bunCont}"></f:message>
             </h1>
-            <form method="post" action="/user" >
+            <form action="home" method="post">
                 <label>
                     <input name="command" value="register" hidden>
                 </label>

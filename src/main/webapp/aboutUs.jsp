@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -76,9 +76,11 @@
             quisquam quo quod repellat reprehenderit repudiandae rerum sequi sint voluptates voluptatibus. Aperiam
             commodi impedit nesciunt nobis omnis rem repellat sed veritatis vero. Eius eum inventore odio qui soluta?
         </div>
-        <div class="col-3">    <a href="images/4.png">img</a></div>
+        <div class="col-3">
+
+        </div>
     </div>
 </div>
-    <c:import url="views/footer.jsp"/>
+<c:import url="views/footer.jsp"/>
 </body>
 </html>

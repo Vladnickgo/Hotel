@@ -12,17 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
 
-/*UserSecurityFilter
- * для проверки пользователя необходимо проверить сессию на наличие пользователя
- * и его роль. Если пользователь не создан
- *
- *
- *
- *
- *
- *
- *
- */
 @WebFilter(urlPatterns = "/user/*",
         dispatcherTypes = {
                 DispatcherType.REQUEST,

@@ -51,7 +51,16 @@ public abstract class AbstractServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        forward(req, resp);
+        final String commandName = req.getParameter("command");
+        LOGGER.info("Command name: " + commandName);
+        Command command = commandNameToCommand.getOrDefault(commandName, defaultCommand);
+        final String page = command.execute(req);
+        if (commandName.equals("logout")) {
+            resp.sendRedirect(page);
+        } else {
+
+            forward(req, resp);
+        } ;
     }
 
     private void forward(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,5 +69,7 @@ public abstract class AbstractServlet extends HttpServlet {
         Command command = commandNameToCommand.getOrDefault(commandName, defaultCommand);
         final String page = command.execute(req);
         req.getRequestDispatcher(page).forward(req, resp);
+
+
     }
 }

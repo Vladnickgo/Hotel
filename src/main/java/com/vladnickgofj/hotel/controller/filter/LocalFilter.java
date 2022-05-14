@@ -35,7 +35,7 @@ public class LocalFilter implements Filter {
             req.getSession().setAttribute(LANGUAGE, req.getParameter(LANGUAGE));
             LOGGER.info(req.getSession().getAttribute("language"));
         }
-        LOGGER.info("Logging from doFilter");
+        LOGGER.info("Logging from doFilter LocalFilter");
         filterChain.doFilter(req, servletResponse);
     }
 
