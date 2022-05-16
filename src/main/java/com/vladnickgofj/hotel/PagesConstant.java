@@ -10,4 +10,7 @@ public final class PagesConstant {
     public static final String ABOUT_PAGE = "/aboutUs.jsp";
     public static final String CONTACTS_PAGE = "/contacts.jsp";
     public static final String NOT_AUTHORIZED_USER_PAGE="/userNa.jsp";
+    public static final String PAGE_NOT_FOUND="/pageNotFound.jsp";
+    public static final String ERROR_MAIL_PAGE="/errorEmailPage.jsp";
+
 }

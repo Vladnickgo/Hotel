@@ -4,6 +4,7 @@ import com.vladnickgofj.hotel.connection.HikariConnectionPool;
 import com.vladnickgofj.hotel.dao.UserDao;
 import com.vladnickgofj.hotel.dao.entity.User;
 import com.vladnickgofj.hotel.service.UserService;
+import com.vladnickgofj.hotel.service.exception.InvalidEmailException;
 import com.vladnickgofj.hotel.service.mapper.Mapper;
 import com.vladnickgofj.hotel.controller.dto.UserDto;
 import com.vladnickgofj.hotel.validator.UserValidator;
@@ -26,7 +27,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto findByEmail(String email) {
         userValidator.validateEmail(email);
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User with email [" + email + "] not found"));
+//        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User with email [" + email + "] not found"));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new InvalidEmailException("User with email [" + email + "] not found"));
+
         return mapper.mapEntityToDto(user);
     }
 
