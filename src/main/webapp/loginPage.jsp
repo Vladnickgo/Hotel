@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -10,8 +10,13 @@
 
 <c:set var="Title" scope="request" value="LogIn"/>
 
+<%--<c:import url="/views/Style.jsp"/>--%>
+
 <c:import url="views/head.jsp"/>
 
+<head>
+    <%--    <link rel="stylesheet" type="text/css" href="views/style/style.css">--%>
+</head>
 <body>
 
 <c:import url="views/header.jsp"/>
@@ -42,10 +47,18 @@
                         <td><input type="submit" value=<f:message key="submit" bundle="${bunCont}"></f:message>></td>
                     </tr>
                     <tr>
-                        <td class="text-danger">${message}</td>
+                        <%--                        <td class="text-danger">${message}</td>--%>
                     </tr>
-                    <input type="text" name="pageName" value="login" hidden>
+                    <%--                    <input type="text" name="pageName" value="login" hidden>--%>
                 </table>
+                <div style="color: red;
+                        font-weight: bold;
+                        font-size: 14pt;
+                        margin-top: 10px;
+                ${authFailed==null?'display: none':''};">
+                    <f:message key="auth.failed" bundle="${bunCont}"/>
+                </div>
+<%--                ${authFailed==null?'hidden':'visible'}--%>
             </form>
         </div>
         <div class="col-4"></div>

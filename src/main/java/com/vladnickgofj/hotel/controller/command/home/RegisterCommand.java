@@ -8,6 +8,7 @@ import com.vladnickgofj.hotel.controller.dto.UserDto;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -19,9 +20,7 @@ public class RegisterCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
-        // TODO: 04.04.2022 logic for registration
-        //to move logic form doSighIn in HelloServlet
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
@@ -45,8 +44,9 @@ public class RegisterCommand implements Command {
             System.out.println("User is saved");
         }catch (Exception e){
             System.out.println("User isn't saved");
+            request.setAttribute("message","User isn't saved");
         }
-        return PagesConstant.LOGIN_PAGE;
+        return PagesConstant.REGISTRATION_PAGE;
     }
 
     private boolean emailValidation(HttpServletRequest req, String email) throws ServletException, IOException {

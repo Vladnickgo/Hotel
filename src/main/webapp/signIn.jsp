@@ -90,6 +90,7 @@
                     </tr>
                 </table>
             </form>
+            <div style="color: red;font-weight: bolder;" class=" ${isAlreadyExist==null?"hidden":' ' }"><fmt:message key="user.exists"/></div>
         </div>
         <div class="col-4"></div>
     </div>
