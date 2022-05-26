@@ -17,6 +17,21 @@
         <location>/error</location>
     </error-page>
     <error-page>
+        <error-code>600</error-code>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <error-code>601</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <error-page>
+        <error-code>602</error-code>
+        <location>/error</location>
+    </error-page>
+
+
+    <error-page>
         <exception-type>com.vladnickgofj.hotel.service.exception.InvalidEmailException</exception-type>
         <location>/error</location>
     </error-page>
@@ -28,5 +43,38 @@
         <exception-type>com.vladnickgofj.hotel.service.exception.InvalidPasswordException</exception-type>
         <location>/error</location>
     </error-page>
+    <error-page>
+        <exception-type>com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPageInvalidConfirmationPassword</exception-type>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <exception-type>com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPageEmailErrorException</exception-type>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <exception-type>com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPageFirstNameErrorException</exception-type>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <exception-type>com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPageLastNameErrorException</exception-type>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <exception-type>com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPagePasswordErrorException</exception-type>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <exception-type>com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPageConfirmationPasswordErrorException</exception-type>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <exception-type>com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPageEntityAlreadyExistException</exception-type>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <exception-type>com.vladnickgofj.hotel.dao.exception.loginPageExceptions.LoginPageEmailErrorException</exception-type>
+        <location>/error</location>
+    </error-page>
+
 
 </web-app>

@@ -5,6 +5,8 @@ import com.vladnickgofj.hotel.controller.command.Command;
 import com.vladnickgofj.hotel.dao.entity.Role;
 import com.vladnickgofj.hotel.service.UserService;
 import com.vladnickgofj.hotel.controller.dto.UserDto;
+import com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPageInvalidConfirmationPassword;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,13 +16,14 @@ import java.util.Objects;
 
 public class RegisterCommand implements Command {
     private final UserService userService;
+    public static final Logger LOGGER = Logger.getLogger(RegisterCommand.class);
 
     public RegisterCommand(UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws RegisterPageInvalidConfirmationPassword, ServletException, IOException {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
@@ -28,24 +31,20 @@ public class RegisterCommand implements Command {
         String confirmationPassword = request.getParameter("confirmationPassword");
 
         if (!Objects.equals(password, confirmationPassword) || Objects.equals(password, "")) {
-            request.setAttribute("confirmationPassword", "Password not Equal");
-            return PagesConstant.REGISTRATION_PAGE;
+            LOGGER.info("Password is not confirmed");
+            request.getSession().setAttribute("firstName", firstName);
+            request.getSession().setAttribute("lastName", lastName);
+            request.getSession().setAttribute("email", email);
+            request.getSession().setAttribute("confirmationPassword", "The password and confirm password fields do not match");
+            throw new RegisterPageInvalidConfirmationPassword("The password and confirm password fields do not match");
         }
-        System.out.println(firstName);
-        System.out.println(lastName);
-        System.out.println(email);
-        System.out.println(password);
-        System.out.println(confirmationPassword);
         UserDto userDto = new UserDto(1, firstName, lastName, email, password, confirmationPassword, Role.USER);
-        System.out.println("User is created");
-        System.out.println("userDto"+userDto);
-        try {
-            userService.save(userDto);
-            System.out.println("User is saved");
-        }catch (Exception e){
-            System.out.println("User isn't saved");
-            request.setAttribute("message","User isn't saved");
-        }
+        LOGGER.info("userDto" + userDto);
+        userService.register(userDto);
+        userService.save(userDto);
+        LOGGER.info("User saved");
+        request.getSession().invalidate();
+        request.setAttribute("userSaved", "User saved");
         return PagesConstant.REGISTRATION_PAGE;
     }
 

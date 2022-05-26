@@ -1,9 +1,6 @@
 package com.vladnickgofj.hotel.controller.filter;
 
 
-
-
-
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -15,7 +12,6 @@ import java.io.IOException;
 @WebFilter("/*")
 public class LocalFilter implements Filter {
     private static final String UTF_8 = "UTF-8";
-
     private static final String LANGUAGE = "language";
     private static final Logger LOGGER = Logger.getLogger(LocalFilter.class);
 

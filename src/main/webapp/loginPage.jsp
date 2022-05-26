@@ -10,22 +10,16 @@
 
 <c:set var="Title" scope="request" value="LogIn"/>
 
-<%--<c:import url="/views/Style.jsp"/>--%>
-
 <c:import url="views/head.jsp"/>
 
-<head>
-    <%--    <link rel="stylesheet" type="text/css" href="views/style/style.css">--%>
-</head>
 <body>
-
 <c:import url="views/header.jsp"/>
 <div class="container mt-5">
     <div class="row text-center">
-        <div class="col-4"></div>
-        <div class="col-4" align="center">
+        <div class="col-3"></div>
+        <div class="col-6" align="center">
             <h1 class="mb-5">
-                <f:message key="logForUsers" bundle="${bunCont}"></f:message>
+                <f:message key="logForUsers" bundle="${bunCont}"/>
             </h1>
             <form action="home" method="post">
                 <label>
@@ -34,22 +28,22 @@
                 <table>
                     <tr>
                         <td>email</td>
-                        <td><input type="text" name="email"></td>
+                        <td><input type="text" value="${loginPageEmail}" name="email"></td>
+                        <td style="${authFailed==null?'display:none':''}">
+                            <f:message key="notValidEmail" bundle="${bunCont}"/>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <f:message key="password" bundle="${bunCont}"></f:message>
                         </td>
                         <td><input type="password" name="password"></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><input type="submit" value=<f:message key="submit" bundle="${bunCont}"></f:message>></td>
                     </tr>
-                    <tr>
-                        <%--                        <td class="text-danger">${message}</td>--%>
-                    </tr>
-                    <%--                    <input type="text" name="pageName" value="login" hidden>--%>
                 </table>
                 <div style="color: red;
                         font-weight: bold;
@@ -58,10 +52,9 @@
                 ${authFailed==null?'display: none':''};">
                     <f:message key="auth.failed" bundle="${bunCont}"/>
                 </div>
-<%--                ${authFailed==null?'hidden':'visible'}--%>
             </form>
         </div>
-        <div class="col-4"></div>
+        <div class="col-3"></div>
     </div>
 </div>
 <c:import url="views/footer.jsp"/>

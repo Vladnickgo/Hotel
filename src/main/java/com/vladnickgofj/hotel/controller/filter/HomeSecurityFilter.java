@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/home/*")
 public class HomeSecurityFilter implements Filter {
-    Logger logger = Logger.getLogger(HomeSecurityFilter.class);
+    public static final Logger logger = Logger.getLogger(HomeSecurityFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,18 +24,17 @@ public class HomeSecurityFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException,AuthorisationFailException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException, AuthorisationFailException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        logger.info("doFiler HomeSecurityFilter");
+        logger.info("doFiler");
         User user = (User) req.getSession().getAttribute("user");
         String command = req.getParameter("command");
         if ((user == null || !Role.USER.equals(user.getRole())) && "show-profile".equals(command)) {
             throw new AuthorisationFailException("The page is not available");
-//            resp.sendRedirect(PagesConstant.NOT_AUTHORIZED_USER_PAGE);
-        } else {
-            chain.doFilter(req, response);
         }
+        chain.doFilter(req, response);
+
 
     }
 

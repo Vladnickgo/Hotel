@@ -5,6 +5,7 @@ import com.vladnickgofj.hotel.PagesConstant;
 import com.vladnickgofj.hotel.controller.command.Command;
 import com.vladnickgofj.hotel.controller.dto.UserDto;
 import com.vladnickgofj.hotel.dao.entity.User;
+import com.vladnickgofj.hotel.dao.exception.loginPageExceptions.LoginPageEmailErrorException;
 import com.vladnickgofj.hotel.service.UserService;
 import com.vladnickgofj.hotel.service.exception.InvalidPasswordException;
 import com.vladnickgofj.hotel.service.mapper.UserMapper;
@@ -24,24 +25,23 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // TODO: 4/7/2022  some logic
         HttpSession session = request.getSession();
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
 
         UserDto byEmail = userService.findByEmail(email);
         if (emailValidation(email)) {
-            request.setAttribute("message", "Email is not correct");
+            throw new LoginPageEmailErrorException("Email not correct");
         }
         if (email.equals(byEmail.getEmail()) && pass.equals(byEmail.getPassword())) {
             User user = new UserMapper().mapDtoToEntity(byEmail);
             user.setPassword(StringUtils.EMPTY);
             session.setAttribute("user", user);
         } else {
-            response.sendError(HttpStatusCodes.NOT_CORRECT_PASSWORD);
+            request.setAttribute("statusCode",HttpStatusCodes.NOT_CORRECT_PASSWORD);
             throw new InvalidPasswordException("Password is not correct");
         }
-        return PagesConstant.USER_PROFILE;
+        return PagesConstant.HOME_PAGE;
     }
 
     private boolean emailValidation(String email) {
