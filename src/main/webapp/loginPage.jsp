@@ -29,28 +29,21 @@
                     <tr>
                         <td>email</td>
                         <td><input type="text" value="${loginPageEmail}" name="email"></td>
-                        <td style="${authFailed==null?'display:none':''}">
-                            <f:message key="notValidEmail" bundle="${bunCont}"/>
-                        </td>
                     </tr>
                     <tr>
                         <td>
                             <f:message key="password" bundle="${bunCont}"></f:message>
                         </td>
                         <td><input type="password" name="password"></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><input type="submit" value=<f:message key="submit" bundle="${bunCont}"></f:message>></td>
                     </tr>
                 </table>
-                <div style="color: red;
-                        font-weight: bold;
-                        font-size: 14pt;
-                        margin-top: 10px;
-                ${authFailed==null?'display: none':''};">
-                    <f:message key="auth.failed" bundle="${bunCont}"/>
+                <div class="alert alert-warning" style="${authFailed==null?'display: none':'margin-top:10px'};">
+                    <p><f:message key="authFailed" bundle="${bunCont}"/></p>
+                    <p><b>${message}</b></p>
                 </div>
             </form>
         </div>

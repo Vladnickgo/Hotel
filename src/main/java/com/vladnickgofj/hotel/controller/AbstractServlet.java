@@ -26,12 +26,12 @@ public abstract class AbstractServlet extends HttpServlet {
         switch (path) {
             case "home": {
                 this.commandNameToCommand = injector.getHomeCommandNameToCommand();
-                LOGGER.info("Hello from Servlet. Path: " + path);
+                LOGGER.info("Path: " + path);
                 break;
             }
             case "user": {
                 this.commandNameToCommand = injector.getUserCommands();
-                LOGGER.info("Hello from Servlet. Path: " + path);
+                LOGGER.info("Path: " + path);
                 break;
             }
             default: {
@@ -60,6 +60,6 @@ public abstract class AbstractServlet extends HttpServlet {
         final String page = command.execute(req, resp);
         LOGGER.info(page);
         LOGGER.info(req.getAttribute("userSaved"));
-        req.getRequestDispatcher(page).forward(req, resp);
+        resp.sendRedirect(page);
     }
 }

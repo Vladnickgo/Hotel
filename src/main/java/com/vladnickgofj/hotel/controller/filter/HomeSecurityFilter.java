@@ -1,18 +1,18 @@
 package com.vladnickgofj.hotel.controller.filter;
 
 
-import com.vladnickgofj.hotel.PagesConstant;
 import com.vladnickgofj.hotel.dao.entity.Role;
 import com.vladnickgofj.hotel.dao.entity.User;
 import com.vladnickgofj.hotel.service.exception.AuthorisationFailException;
 import org.apache.log4j.Logger;
 
-import javax.security.sasl.AuthenticationException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static com.vladnickgofj.hotel.validator.ValidatorErrorMessage.NOT_AVAILABLE_PAGE;
 
 @WebFilter(urlPatterns = "/home/*")
 public class HomeSecurityFilter implements Filter {
@@ -31,15 +31,12 @@ public class HomeSecurityFilter implements Filter {
         User user = (User) req.getSession().getAttribute("user");
         String command = req.getParameter("command");
         if ((user == null || !Role.USER.equals(user.getRole())) && "show-profile".equals(command)) {
-            throw new AuthorisationFailException("The page is not available");
+            throw new AuthorisationFailException(NOT_AVAILABLE_PAGE);
         }
         chain.doFilter(req, response);
-
-
     }
 
     @Override
     public void destroy() {
-
     }
 }

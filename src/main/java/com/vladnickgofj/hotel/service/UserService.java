@@ -1,6 +1,7 @@
 package com.vladnickgofj.hotel.service;
 
 import com.vladnickgofj.hotel.controller.dto.UserDto;
+import com.vladnickgofj.hotel.dao.entity.User;
 
 public interface UserService {
 
@@ -8,6 +9,5 @@ public interface UserService {
 
     void save(UserDto userDto);
 
-    void register(UserDto userDto);
-
+    User login(String email, String password);
 }

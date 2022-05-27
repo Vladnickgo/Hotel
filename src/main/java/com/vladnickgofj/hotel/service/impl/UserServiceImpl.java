@@ -1,21 +1,22 @@
 package com.vladnickgofj.hotel.service.impl;
 
-import com.vladnickgofj.hotel.HttpStatusCodes;
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
 import com.vladnickgofj.hotel.dao.UserDao;
 import com.vladnickgofj.hotel.dao.entity.User;
-import com.vladnickgofj.hotel.dao.exception.loginPageExceptions.LoginPageEmailErrorException;
 import com.vladnickgofj.hotel.service.UserService;
-import com.vladnickgofj.hotel.dao.exception.registerPageExceptions.RegisterPageEntityAlreadyExistException;
-import com.vladnickgofj.hotel.service.exception.InvalidEmailException;
+import com.vladnickgofj.hotel.service.exception.EntityAlreadyExistException;
 import com.vladnickgofj.hotel.service.mapper.Mapper;
 import com.vladnickgofj.hotel.controller.dto.UserDto;
+import com.vladnickgofj.hotel.service.mapper.UserMapper;
 import com.vladnickgofj.hotel.validator.UserValidator;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.vladnickgofj.hotel.validator.ValidatorErrorMessage.EMAIL_ERROR_MESSAGE;
+import java.util.Objects;
+
+import static com.vladnickgofj.hotel.validator.ValidatorErrorMessage.*;
 
 public class UserServiceImpl implements UserService {
 
@@ -37,34 +38,53 @@ public class UserServiceImpl implements UserService {
     public UserDto findByEmail(String email) {
         userValidator.validateEmail(email);
         User user = userRepository.findByEmail(email).orElseThrow(() ->
-                new InvalidEmailException("User with email [" + email + "] not found"));
+                new IllegalArgumentException(USER_NOT_FOUND));
         return mapper.mapEntityToDto(user);
     }
 
     @Override
     public void save(UserDto userDto) {
-        System.out.println("Hello from UserServiceImpl, method save()");
-        userValidator.validate(userDto);
-        userRepository.findByEmail(userDto.getEmail()).ifPresent(err -> {
-            execute(request, HttpStatusCodes.NOT_CORRECT_EMAIL);
-//            throw new InvalidEmailException("Email is not correct");
-            throw new LoginPageEmailErrorException(EMAIL_ERROR_MESSAGE);
-        });
-        User user = mapper.mapDtoToEntity(userDto);
-        userRepository.save(user);
-        }
 
-    @Override
-    public void register(UserDto userDto) {
+        userValidator.validateEmail(userDto.getEmail());
         userValidator.validate(userDto);
         if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-            LOGGER.info("A user with this Email is already registered");
-            throw new RegisterPageEntityAlreadyExistException("A user with this Email is already registered");
+            LOGGER.info(USER_ALREADY_EXIST_ERROR_MESSAGE);
+            throw new EntityAlreadyExistException(USER_ALREADY_EXIST_ERROR_MESSAGE);
+        }
+        String password = userDto.getPassword();
+        String confirmationPassword = userDto.getConfirmationPassword();
+        if (!Objects.equals(password, confirmationPassword) || Objects.equals(password, "")) {
+            LOGGER.info(CONFIRMATION_PASSWORD_ERROR_MESSAGE);
+            throw new IllegalArgumentException(CONFIRMATION_PASSWORD_ERROR_MESSAGE);
+        }
+        User user = mapper.mapDtoToEntity(userDto);
+        userRepository.save(user);
+    }
+
+
+    @Override
+    public User login(String email, String password) {
+        UserDto userDto = findByEmail(email);
+        if (emailValidation(email)) {
+            LOGGER.info(EMAIL_ERROR_MESSAGE);
+            throw new IllegalArgumentException(EMAIL_ERROR_MESSAGE);
+        }
+        if (email.equals(userDto.getEmail()) && password.equals(userDto.getPassword())) {
+            User user = new UserMapper().mapDtoToEntity(userDto);
+            user.setPassword(StringUtils.EMPTY);
+            return user;
+        } else {
+            throw new IllegalArgumentException(PASSWORD_ERROR_MESSAGE);
         }
     }
 
+    private boolean emailValidation(String email) {
+        String regExp = "^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
+        return !email.matches(regExp);
+    }
+
     private void execute(HttpServletRequest request, Integer codes) {
-        request.setAttribute("statusCode", codes);
+
     }
 
 }

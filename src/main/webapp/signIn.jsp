@@ -48,9 +48,6 @@
                         <td>
                             <input type="text" name="firstName" placeholder="Ivan" value=${firstName}><br>
                         </td>
-                        <td style="${notValidFirstName==null?'display:none':''}">
-                            <f:message key="notValidFirstName" bundle="${bunCont}"/>
-                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -58,9 +55,6 @@
                         </td>
                         <td>
                             <input type="text" name="lastName" placeholder="Ivanov" value=${lastName}><br>
-                        </td>
-                        <td style="${notValidLastName==null?'display:none':''}">
-                            <f:message key="notValidLastName" bundle="${bunCont}"/>
                         </td>
                     </tr>
                     <tr>
@@ -70,9 +64,6 @@
                         <td>
                             <input type="text" name="email" placeholder="example@gmail.com" value=${email}><br>
                         </td>
-                        <td style="${notValidEmail==null?'display:none':''}">
-                            <f:message key="notValidEmail" bundle="${bunCont}"/>
-                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -81,9 +72,6 @@
                         <td>
                             <input type="text" name="password"><br>
                         </td>
-                        <td style="${notValidPassword==null?'display:none':''}">
-                            <f:message key="notValidPassword" bundle="${bunCont}"/>
-                        </td>
                     </tr>
                     <tr>
                         <td pr-2>
@@ -91,9 +79,6 @@
                         </td>
                         <td>
                             <input type="text" name="confirmationPassword"><br>
-                        </td>
-                        <td style="${notValidConfirmPassword==null?'display:none':''}">
-                            <f:message key="notValidConfirmPassword" bundle="${bunCont}"/>
                         </td>
                     </tr>
                     <tr>
@@ -108,17 +93,6 @@
                         <td class="text-muted colspan-2">
                             <sup>*</sup> - <f:message key="requireFields" bundle="${bunCont}"/>
                         </td>
-                        <td>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="alert alert-danger"
-<%--                            style="${confirmationPassword==null?'display:none':''}">--%>
-<%--                            <f:message key="confirmationPassword" bundle="${bunCont}"/>--%>
-                            style="${userAlreadyExist==null?'display:none':''}">
-                            <f:message key="userExists" bundle="${bunCont}"/>
-
-                        </td>
                     </tr>
                     <tr>
                         <td colspan="2" style="${userSaved==null?'display:none':''}">
@@ -129,14 +103,15 @@
                                 </svg>
                                 <div>
                                     <f:message key="userSaved" bundle="${bunCont}"/>
+                                    <div class="alert alert-warning" style="${message==null?'display: none':''}">
+                                        <b>${message}</b></div>
                                 </div>
                             </div>
                         </td>
                     </tr>
                 </table>
             </form>
-            <div style="color: red;font-weight: bolder; ${isAlreadyExist==null?'display: none':''}"><f:message
-                    key="userExists" bundle="${bunCont}"/></div>
+            <div class="alert alert-warning" style="${message==null?'display: none':''}"><b>${message}</b></div>
         </div>
         <div class="col-3"></div>
     </div>
