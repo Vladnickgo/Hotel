@@ -30,8 +30,6 @@ public class BookingDaoImpl extends AbstractCrudDaoImpl<Booking> {
                 .bookingStatusId(resultSet.getInt("booking_status_id"))
                 .usersId(resultSet.getInt("user_id"))
                 .build();
-
-
     }
 
     @Override

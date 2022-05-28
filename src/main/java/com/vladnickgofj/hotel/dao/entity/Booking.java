@@ -139,4 +139,18 @@ public class Booking {
     public int hashCode() {
         return Objects.hash(id, checkIn, checkOut, roomId, night, bookTime, bookingStatusId, usersId);
     }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", checkIn=" + checkIn +
+                ", checkOut=" + checkOut +
+                ", roomId=" + roomId +
+                ", night=" + night +
+                ", bookTime=" + bookTime +
+                ", bookingStatusId=" + bookingStatusId +
+                ", usersId=" + usersId +
+                '}';
+    }
 }

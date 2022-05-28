@@ -1,13 +1,14 @@
 package com.vladnickgofj.hotel.dao.impl;
 
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
+import com.vladnickgofj.hotel.dao.RoomDao;
 import com.vladnickgofj.hotel.dao.entity.Room;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RoomDaoImpl extends AbstractCrudDaoImpl<Room> {
+public class RoomDaoImpl extends AbstractCrudDaoImpl<Room> implements RoomDao {
     private final static String INSERT_INTO = "INSERT INTO room(type_id, number_of_beds, status_id, price, hotel_id) VALUES (?,?,?,?,?)";
     private static final String FIND_BY_ID = "SELECT * FROM room WHERE room_id=?";
     private static final String FIND_ALL = "SELECT * FROM room";
@@ -19,12 +20,14 @@ public class RoomDaoImpl extends AbstractCrudDaoImpl<Room> {
 
     @Override
     protected Room mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return new Room(resultSet.getInt("room_id"),
-                resultSet.getInt("type_id"),
-                resultSet.getInt("number_of_beds"),
-                resultSet.getInt("status_id"),
-                resultSet.getInt("price"),
-                resultSet.getInt("hotel_id"));
+        return Room.newBuilder()
+                .id(resultSet.getInt("room_id"))
+                .typeId(resultSet.getInt("type_id"))
+                .numberOfBeds(resultSet.getInt("number_of_beds"))
+                .statusId(resultSet.getInt("status_id"))
+                .price(resultSet.getInt("price"))
+                .hotelId(resultSet.getInt("hotel_id"))
+                .build();
     }
 
     @Override
