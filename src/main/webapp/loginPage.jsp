@@ -41,9 +41,9 @@
                         <td><input type="submit" value=<f:message key="submit" bundle="${bunCont}"/>></td>
                     </tr>
                 </table>
-                <div class="alert alert-warning" style="${authFailed==null?'display: none':'margin-top:10px'};">
+                <div class="alert alert-warning" style="${errorMessage==null?'display: none':'margin-top:10px'};">
                     <p><f:message key="authFailed" bundle="${bunCont}"/></p>
-                    <p>${message}</p>
+                    <p>${errroMessage}</p>
                 </div>
             </form>
         </div>

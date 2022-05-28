@@ -21,20 +21,7 @@ public class RegisterCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String confirmationPassword = request.getParameter("confirmationPassword");
-        UserDto userDto = UserDto.newBuilder()
-                .id(1)
-                .firstName(firstName)
-                .lastName(lastName)
-                .email(email)
-                .password(password)
-                .confirmationPassword(confirmationPassword)
-                .role(Role.USER)
-                .build();
+        UserDto userDto = mapRequestToUserDto(request);
         LOGGER.info("userDto" + userDto);
         try {
             request.getSession();
@@ -43,13 +30,30 @@ public class RegisterCommand implements Command {
             request.getSession().invalidate();
             request.getSession().setAttribute("userSaved", "true");
         } catch (IllegalArgumentException | EntityAlreadyExistException exception) {
-            String message = exception.getMessage();
-            LOGGER.info(message);
-            request.setAttribute("firstName", firstName);
-            request.setAttribute("lastName", lastName);
-            request.setAttribute("email", email);
-            request.setAttribute("message", message);
+            String errorMessage = exception.getMessage();
+            LOGGER.info(errorMessage);
+            request.setAttribute("firstName", userDto.getFirstName());
+            request.setAttribute("lastName", userDto.getLastName());
+            request.setAttribute("email", userDto.getEmail());
+            request.setAttribute("errorMessage", errorMessage);
         }
         return PagesConstant.REGISTRATION_PAGE;
+    }
+
+    private UserDto mapRequestToUserDto(HttpServletRequest request){
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String confirmationPassword = request.getParameter("confirmationPassword");
+        return UserDto.newBuilder()
+                .id(1)
+                .firstName(firstName)
+                .lastName(lastName)
+                .email(email)
+                .password(password)
+                .confirmationPassword(confirmationPassword)
+                .role(Role.USER)
+                .build();
     }
 }

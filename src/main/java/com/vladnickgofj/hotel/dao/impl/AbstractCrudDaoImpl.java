@@ -2,6 +2,9 @@ package com.vladnickgofj.hotel.dao.impl;
 
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
 import com.vladnickgofj.hotel.dao.CrudDao;
+import com.vladnickgofj.hotel.dao.exception.DataBaseRuntimeException;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,14 +14,14 @@ import java.util.function.BiConsumer;
 
 public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
 
-//    private static final Logger LOGGER = Logger.getLogger(AbstractCrudDaoImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(AbstractCrudDaoImpl.class);
 
     private static final BiConsumer<PreparedStatement, String> STRING_CONSUMER = (PreparedStatement pr, String param) -> {
         try {
             pr.setString(1, param);
         } catch (SQLException e) {
-//            throw new DataBaseRuntimeException(e);
-            throw new RuntimeException(e);
+            LOGGER.error("Connection is failed" + e);
+            throw new DataBaseRuntimeException(e);
         }
     };
 
@@ -26,8 +29,8 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
         try {
             pr.setInt(1, param);
         } catch (SQLException e) {
-//            throw new DataBaseRuntimeException(e);
-            throw new RuntimeException(e);
+            LOGGER.error("Connection is failed" + e);
+            throw new DataBaseRuntimeException(e);
         }
     };
 
@@ -60,8 +63,8 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
                 return resultSet.next() ? Optional.ofNullable(mapResultSetToEntity(resultSet)) : Optional.empty();
             }
         } catch (SQLException e) {
-//            throw new DataBaseRuntimeException(e);
-            throw new RuntimeException(e);
+            LOGGER.error("Connection is failed" + e);
+            throw new DataBaseRuntimeException(e);
         }
     }
 
@@ -71,9 +74,8 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
             mapForInsertStatement(preparedStatement, entity);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-//            LOGGER.error("Insertion is failed", e);
-//            throw new DataBaseRuntimeException("Insertion is failed", e);
-            throw new RuntimeException("Insertion is failed", e);
+            LOGGER.error("Insertion is failed", e);
+            throw new DataBaseRuntimeException("Insertion is failed", e);
         }
     }
 
@@ -83,9 +85,8 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
             mapForUpdateStatement(preparedStatement, entity);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-//            LOGGER.error("Update is failed", e);
-//            throw new DataBaseRuntimeException(e);
-            throw new RuntimeException(e);
+            LOGGER.error("Update is failed", e);
+            throw new DataBaseRuntimeException(e);
         }
     }
 
@@ -100,9 +101,8 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
                 return new ArrayList<>(entities);
             }
         } catch (SQLException e) {
-//            LOGGER.error("Connection is failed" + e);
-//            throw new DataBaseRuntimeException(e);
-            throw new RuntimeException("FindAll is failed " + e);
+            LOGGER.error("Connection is failed" + e);
+            throw new DataBaseRuntimeException(e);
         }
     }
 

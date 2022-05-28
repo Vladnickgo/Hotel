@@ -107,7 +107,7 @@
                     </tr>
                 </table>
             </form>
-            <div class="alert alert-warning" style="${message==null?'display: none':''}">${message}</div>
+            <div class="alert alert-warning" style="${errorMessage==null?'display: none':''}">${errorMessage}</div>
         </div>
         <div class="col-3"></div>
     </div>

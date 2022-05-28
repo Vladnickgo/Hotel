@@ -32,9 +32,8 @@ public class LoginCommand implements Command {
         } catch (IllegalArgumentException exception) {
             String message = exception.getMessage();
             LOGGER.info(message);
-            request.setAttribute("authFailed", "true");
             request.setAttribute("loginPageEmail", email);
-            request.setAttribute("message", message);
+            request.setAttribute("errorMessage", message);
             return PagesConstant.LOGIN_PAGE;
         }
 
