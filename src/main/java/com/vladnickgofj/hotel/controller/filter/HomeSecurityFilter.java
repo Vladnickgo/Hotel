@@ -1,11 +1,10 @@
 package com.vladnickgofj.hotel.controller.filter;
 
 
+import com.vladnickgofj.hotel.controller.dto.UserDto;
 import com.vladnickgofj.hotel.dao.entity.Role;
-import com.vladnickgofj.hotel.dao.entity.User;
 import com.vladnickgofj.hotel.service.exception.AuthorisationFailException;
 import org.apache.log4j.Logger;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ public class HomeSecurityFilter implements Filter {
     public static final Logger logger = Logger.getLogger(HomeSecurityFilter.class);
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig){
         logger.info("Init HomeSecurityFilter");
     }
 
@@ -28,7 +27,7 @@ public class HomeSecurityFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         logger.info("doFiler");
-        User user = (User) req.getSession().getAttribute("user");
+        UserDto user = (UserDto) req.getSession().getAttribute("user");
         String command = req.getParameter("command");
         if ((user == null || !Role.USER.equals(user.getRole())) && "show-profile".equals(command)) {
             throw new AuthorisationFailException(NOT_AVAILABLE_PAGE);

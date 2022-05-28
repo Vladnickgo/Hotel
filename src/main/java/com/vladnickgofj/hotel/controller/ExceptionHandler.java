@@ -16,7 +16,7 @@ public class ExceptionHandler extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(ExceptionHandler.class);
 
     @Override
-    public void init(){
+    public void init() {
     }
 
     @Override

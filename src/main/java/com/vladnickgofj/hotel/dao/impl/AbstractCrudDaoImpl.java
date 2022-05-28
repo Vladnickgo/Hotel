@@ -2,7 +2,6 @@ package com.vladnickgofj.hotel.dao.impl;
 
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
 import com.vladnickgofj.hotel.dao.CrudDao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,7 +60,6 @@ public abstract class AbstractCrudDaoImpl<E> implements CrudDao<E, Integer> {
                 return resultSet.next() ? Optional.ofNullable(mapResultSetToEntity(resultSet)) : Optional.empty();
             }
         } catch (SQLException e) {
-//            LOGGER.error("");
 //            throw new DataBaseRuntimeException(e);
             throw new RuntimeException(e);
         }

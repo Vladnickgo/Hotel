@@ -13,12 +13,13 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class UserValidator implements Validator<UserDto> {
 
     @Override
-    public void validate(UserDto entity){
+    public void validate(UserDto entity) {
         if (entity == null) {
             throw new IllegalArgumentException(USER_IS_NULL_MESSAGE);
         }
         validateByParam(UserDto::getFirstName, FIRST_NAME_PATTERN, FIRST_NAME_ERROR_MESSAGE, entity);
         validateByParam(UserDto::getLastName, LAST_NAME_PATTERN, LAST_NAME_ERROR_MESSAGE, entity);
+        validateByParam(UserDto::getEmail, EMAIL_PATTERN, EMAIL_ERROR_MESSAGE, entity);
         validateByParam(UserDto::getPassword, PASSWORD_PATTERN, PASSWORD_ERROR_MESSAGE, entity);
         validateByParam(UserDto::getConfirmationPassword, PASSWORD_PATTERN, CONFIRMATION_PASSWORD_ERROR_MESSAGE, entity);
     }

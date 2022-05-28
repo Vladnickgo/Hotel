@@ -28,7 +28,7 @@ public final class ApplicationContextInjector {
 
     private static final UserValidator USER_VALIDATOR = new UserValidator();
 
-    private static final UserService USER_SERVICE = new UserServiceImpl(HIKARI_CONNECTION_POOL, USER_DAO, USER_MAPPER, USER_VALIDATOR);
+    private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_MAPPER, USER_VALIDATOR);
 
     private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
 

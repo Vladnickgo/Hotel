@@ -38,7 +38,6 @@ public abstract class AbstractServlet extends HttpServlet {
                 LOGGER.error(NOT_VALID_PATH);
                 throw new IllegalArgumentException(NOT_VALID_PATH);
             }
-
         }
         this.defaultCommand = commandNameToCommand.get(defaultCommand);
     }
@@ -59,7 +58,6 @@ public abstract class AbstractServlet extends HttpServlet {
         Command command = commandNameToCommand.getOrDefault(commandName, defaultCommand);
         final String page = command.execute(req, resp);
         LOGGER.info(page);
-        LOGGER.info(req.getAttribute("userSaved"));
-        resp.sendRedirect(page);
+        req.getRequestDispatcher(page).forward(req, resp);
     }
 }

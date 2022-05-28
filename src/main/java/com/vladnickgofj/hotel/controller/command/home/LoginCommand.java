@@ -2,6 +2,7 @@ package com.vladnickgofj.hotel.controller.command.home;
 
 import com.vladnickgofj.hotel.PagesConstant;
 import com.vladnickgofj.hotel.controller.command.Command;
+import com.vladnickgofj.hotel.controller.dto.UserDto;
 import com.vladnickgofj.hotel.dao.entity.User;
 import com.vladnickgofj.hotel.service.UserService;
 import org.apache.log4j.Logger;
@@ -26,14 +27,14 @@ public class LoginCommand implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         try {
-            User user = userService.login(email, password);
+            UserDto user = userService.login(email, password);
             session.setAttribute("user", user);
         } catch (IllegalArgumentException exception) {
             String message = exception.getMessage();
             LOGGER.info(message);
-            session.setAttribute("authFailed", "true");
-            session.setAttribute("loginPageEmail", email);
-            session.setAttribute("message", message);
+            request.setAttribute("authFailed", "true");
+            request.setAttribute("loginPageEmail", email);
+            request.setAttribute("message", message);
             return PagesConstant.LOGIN_PAGE;
         }
 

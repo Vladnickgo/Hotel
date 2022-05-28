@@ -32,18 +32,18 @@
                     </tr>
                     <tr>
                         <td>
-                            <f:message key="password" bundle="${bunCont}"></f:message>
+                            <f:message key="password" bundle="${bunCont}"/>
                         </td>
                         <td><input type="password" name="password"></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value=<f:message key="submit" bundle="${bunCont}"></f:message>></td>
+                        <td><input type="submit" value=<f:message key="submit" bundle="${bunCont}"/>></td>
                     </tr>
                 </table>
                 <div class="alert alert-warning" style="${authFailed==null?'display: none':'margin-top:10px'};">
                     <p><f:message key="authFailed" bundle="${bunCont}"/></p>
-                    <p><b>${message}</b></p>
+                    <p>${message}</p>
                 </div>
             </form>
         </div>
