@@ -1,22 +1,23 @@
 package com.vladnickgofj.hotel.dao.entity;
 
+import java.lang.reflect.Type;
 import java.util.Objects;
 
 public class Room {
     private final int id;
-    private final int typeId;
+    private final RoomType roomType;
     private final int numberOfBeds;
-    private final int statusId;
+    private final RoomStatus roomStatus;
     private final int price;
-    private final int hotelId;
+    private final Hotel hotel;
 
     private Room(Builder builder) {
         id = builder.id;
-        typeId = builder.typeId;
+        roomType = builder.roomType;
         numberOfBeds = builder.numberOfBeds;
-        statusId = builder.statusId;
+        roomStatus = builder.roomStatus;
         price = builder.price;
-        hotelId = builder.hotelId;
+        hotel = builder.hotel;
     }
 
     public static Builder newBuilder() {
@@ -25,11 +26,11 @@ public class Room {
 
     public static final class Builder {
         private int id;
-        private int typeId;
+        private RoomType roomType;
         private int numberOfBeds;
-        private int statusId;
+        private RoomStatus roomStatus;
         private int price;
-        private int hotelId;
+        private Hotel hotel;
 
         private Builder() {
         }
@@ -39,8 +40,8 @@ public class Room {
             return this;
         }
 
-        public Builder typeId(int val) {
-            typeId = val;
+        public Builder roomType(RoomType val) {
+            roomType = val;
             return this;
         }
 
@@ -49,8 +50,8 @@ public class Room {
             return this;
         }
 
-        public Builder statusId(int val) {
-            statusId = val;
+        public Builder roomStatus(RoomStatus val) {
+            roomStatus = val;
             return this;
         }
 
@@ -59,8 +60,8 @@ public class Room {
             return this;
         }
 
-        public Builder hotelId(int val) {
-            hotelId = val;
+        public Builder hotel(Hotel val) {
+            hotel = val;
             return this;
         }
 
@@ -73,24 +74,24 @@ public class Room {
         return id;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public RoomType getRoomType() {
+        return roomType;
     }
 
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public RoomStatus getRoomStatus() {
+        return roomStatus;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public int getHotelId() {
-        return hotelId;
+    public Hotel getHotel() {
+        return hotel;
     }
 
     @Override
@@ -98,24 +99,23 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return id == room.id && typeId == room.typeId && numberOfBeds == room.numberOfBeds && statusId == room.statusId && price == room.price && hotelId == room.hotelId;
+        return id == room.id && numberOfBeds == room.numberOfBeds && price == room.price && Objects.equals(roomType, room.roomType) && Objects.equals(roomStatus, room.roomStatus) && Objects.equals(hotel, room.hotel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, typeId, numberOfBeds, statusId, price, hotelId);
+        return Objects.hash(id, roomType, numberOfBeds, roomStatus, price, hotel);
     }
 
     @Override
     public String toString() {
         return "Room{" +
                 "id=" + id +
-                ", typeId=" + typeId +
+                ", roomType=" + roomType +
                 ", numberOfBeds=" + numberOfBeds +
-                ", statusId=" + statusId +
+                ", roomStatus=" + roomStatus +
                 ", price=" + price +
-                ", hotelId=" + hotelId +
+                ", hotel=" + hotel +
                 '}';
     }
-
 }

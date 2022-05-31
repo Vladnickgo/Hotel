@@ -4,19 +4,45 @@ import java.util.Objects;
 
 public class RoomType {
     private final int id;
-    private final String name;
+    private final String typeName;
 
-    public RoomType(int id, String name) {
-        this.id = id;
-        this.name = name;
+    private RoomType(Builder builder) {
+        id = builder.id;
+        typeName = builder.typeName;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private int id;
+        private String typeName;
+
+        private Builder() {
+        }
+
+        public Builder id(int val) {
+            id = val;
+            return this;
+        }
+
+        public Builder typeName(String val) {
+            typeName = val;
+            return this;
+        }
+
+        public RoomType build() {
+            return new RoomType(this);
+        }
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTypeName() {
+        return typeName;
     }
 
     @Override
@@ -24,19 +50,19 @@ public class RoomType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoomType roomType = (RoomType) o;
-        return id == roomType.id && Objects.equals(name, roomType.name);
+        return id == roomType.id && Objects.equals(typeName, roomType.typeName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, typeName);
     }
 
     @Override
     public String toString() {
         return "RoomType{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", typeName='" + typeName + '\'' +
                 '}';
     }
 }

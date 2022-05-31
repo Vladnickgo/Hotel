@@ -3,6 +3,7 @@ package com.vladnickgofj.hotel.dao.impl;
 import com.vladnickgofj.hotel.connection.HikariConnectionPool;
 import com.vladnickgofj.hotel.dao.HotelDao;
 import com.vladnickgofj.hotel.dao.entity.Hotel;
+import com.vladnickgofj.hotel.dao.mapper.ResultSetMapper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ public class HotelDaoImpl extends AbstractCrudDaoImpl<Hotel> implements HotelDao
 
     @Override
     protected Hotel mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return new Hotel(resultSet.getInt("hotel_id"), resultSet.getString("name"));
+        return ResultSetMapper.mapResultSetToHotel(resultSet);
     }
 
     @Override

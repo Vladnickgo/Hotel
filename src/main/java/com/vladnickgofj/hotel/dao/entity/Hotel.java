@@ -6,9 +6,36 @@ public class Hotel {
     private final int id;
     private final String name;
 
-    public Hotel(int id, String name) {
-        this.id = id;
-        this.name = name;
+    private Hotel(Builder builder) {
+        id = builder.id;
+        name = builder.name;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+
+    public static final class Builder {
+        private int id;
+        private String name;
+
+        private Builder() {
+        }
+
+        public Builder id(int val) {
+            id = val;
+            return this;
+        }
+
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public Hotel build() {
+            return new Hotel(this);
+        }
     }
 
     public int getId() {

@@ -6,9 +6,35 @@ public class BookingStatus {
     private final int id;
     private final String name;
 
-    public BookingStatus(int id, String name) {
-        this.id = id;
-        this.name = name;
+    private BookingStatus(Builder builder) {
+        id = builder.id;
+        name = builder.name;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private int id;
+        private String name;
+
+        private Builder() {
+        }
+
+        public Builder id(int val) {
+            id = val;
+            return this;
+        }
+
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public BookingStatus build() {
+            return new BookingStatus(this);
+        }
     }
 
     public int getId() {

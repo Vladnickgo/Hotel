@@ -4,14 +4,21 @@ import java.util.Objects;
 
 public class Payment {
     private final int id;
-    private final int bookingId;
-    private final int userId;
+    private final Booking booking;
+    private final User user;
     private final int amount;
+
+    public Payment(int id, Booking booking, User user, int amount) {
+        this.id = id;
+        this.booking = booking;
+        this.user = user;
+        this.amount = amount;
+    }
 
     private Payment(Builder builder) {
         id = builder.id;
-        bookingId = builder.bookingId;
-        userId = builder.userId;
+        booking = builder.booking;
+        user = builder.user;
         amount = builder.amount;
     }
 
@@ -19,11 +26,11 @@ public class Payment {
         return new Builder();
     }
 
-
     public static final class Builder {
+
         private int id;
-        private int bookingId;
-        private int userId;
+        private Booking booking;
+        private User user;
         private int amount;
 
         private Builder() {
@@ -34,13 +41,13 @@ public class Payment {
             return this;
         }
 
-        public Builder bookingId(int val) {
-            bookingId = val;
+        public Builder booking(Booking val) {
+            booking = val;
             return this;
         }
 
-        public Builder userId(int val) {
-            userId = val;
+        public Builder user(User val) {
+            user = val;
             return this;
         }
 
@@ -52,18 +59,19 @@ public class Payment {
         public Payment build() {
             return new Payment(this);
         }
+
     }
 
     public int getId() {
         return id;
     }
 
-    public int getBookingId() {
-        return bookingId;
+    public Booking getBooking() {
+        return booking;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public int getAmount() {
@@ -75,20 +83,20 @@ public class Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return id == payment.id && bookingId == payment.bookingId && userId == payment.userId && amount == payment.amount;
+        return id == payment.id && amount == payment.amount && Objects.equals(booking, payment.booking) && Objects.equals(user, payment.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, bookingId, userId, amount);
+        return Objects.hash(id, booking, user, amount);
     }
 
     @Override
     public String toString() {
         return "Payment{" +
                 "id=" + id +
-                ", bookingId=" + bookingId +
-                ", userId=" + userId +
+                ", booking=" + booking +
+                ", user=" + user +
                 ", amount=" + amount +
                 '}';
     }
