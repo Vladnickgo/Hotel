@@ -12,29 +12,30 @@ import java.sql.SQLException;
 public class PaymentDaoImpl extends AbstractCrudDaoImpl<Payment> implements PaymentDao {
 
     private final static String INSERT_INTO = "INSERT INTO payments(booking_id, user_id, amount) VALUES (?,?,?) ";
-    private static final String FIND_BY_ID = "SELECT *\n" +
-            "FROM payments\n" +
-            "         LEFT JOIN bookings b ON b.booking_id = payments.booking_id\n" +
-            "         LEFT JOIN users u ON u.user_id = b.user_id\n" +
-            "         LEFT JOIN room r ON r.room_id = b.room_id\n" +
-            "         LEFT JOIN room_type rt ON rt.type_id = r.type_id\n" +
-            "         LEFT JOIN room_status rs ON rs.status_id = r.status_id\n" +
-            "         LEFT JOIN hotel h ON h.hotel_id = r.hotel_id\n" +
+    private static final String FIND_BY_ID = "SELECT * " +
+            "FROM payments " +
+            "         LEFT JOIN bookings b ON b.booking_id = payments.booking_id " +
+            "         LEFT JOIN users u ON u.user_id = b.user_id " +
+            "         LEFT JOIN room r ON r.room_id = b.room_id " +
+            "         LEFT JOIN room_type rt ON rt.type_id = r.type_id " +
+            "         LEFT JOIN room_status rs ON rs.status_id = r.status_id " +
+            "         LEFT JOIN hotel h ON h.hotel_id = r.hotel_id " +
             "         LEFT JOIN bookings_status bs ON bs.booking_status_id = b.booking_status_id " +
             "WHERE payment_id=?";
 
 
-    private static final String FIND_ALL = "SELECT *\n" +
-            "FROM payments\n" +
-            "         LEFT JOIN bookings b ON b.booking_id = payments.booking_id\n" +
-            "         LEFT JOIN users u ON u.user_id = b.user_id\n" +
-            "         LEFT JOIN room r ON r.room_id = b.room_id\n" +
-            "         LEFT JOIN room_type rt ON rt.type_id = r.type_id\n" +
-            "         LEFT JOIN room_status rs ON rs.status_id = r.status_id\n" +
-            "         LEFT JOIN hotel h ON h.hotel_id = r.hotel_id\n" +
+    private static final String FIND_ALL = "SELECT * " +
+            "FROM payments " +
+            "         LEFT JOIN bookings b ON b.booking_id = payments.booking_id " +
+            "         LEFT JOIN users u ON u.user_id = b.user_id " +
+            "         LEFT JOIN room r ON r.room_id = b.room_id " +
+            "         LEFT JOIN room_type rt ON rt.type_id = r.type_id " +
+            "         LEFT JOIN room_status rs ON rs.status_id = r.status_id " +
+            "         LEFT JOIN hotel h ON h.hotel_id = r.hotel_id " +
             "         LEFT JOIN bookings_status bs ON bs.booking_status_id = b.booking_status_id";
 
-    private static final String UPDATE_PAYMENT = "UPDATE payments SET booking_id=?, user_id=?, amount=? WHERE payment_id=?";
+    private static final String UPDATE_PAYMENT = "UPDATE payments "+
+            "SET booking_id=?, user_id=?, amount=? WHERE payment_id=?";
 
     public PaymentDaoImpl(HikariConnectionPool connector) {
         super(connector, INSERT_INTO, FIND_BY_ID, FIND_ALL, UPDATE_PAYMENT);

@@ -10,17 +10,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RoomDaoImpl extends AbstractCrudDaoImpl<Room> implements RoomDao {
-    private final static String INSERT_INTO = "INSERT INTO room(type_id, number_of_beds, status_id, price, hotel_id) VALUES (?,?,?,?,?)";
-    private static final String FIND_BY_ID = "SELECT * FROM room\n" +
-            "LEFT OUTER JOIN room_type rt on rt.type_id = room.type_id\n" +
-            "LEFT JOIN room_status rs on rs.status_id = room.status_id\n" +
-            "LEFT JOIN hotel h on h.hotel_id = room.hotel_id\n" +
+    private final static String INSERT_INTO = "INSERT INTO " +
+            "room(type_id, number_of_beds, status_id, price, hotel_id) VALUES (?,?,?,?,?)";
+    private static final String FIND_BY_ID = "SELECT * FROM room " +
+            "LEFT OUTER JOIN room_type rt on rt.type_id = room.type_id " +
+            "LEFT JOIN room_status rs on rs.status_id = room.status_id " +
+            "LEFT JOIN hotel h on h.hotel_id = room.hotel_id " +
             "WHERE room_id=?;";
-    private static final String FIND_ALL = "SELECT * FROM room\n" +
-            "LEFT OUTER JOIN room_type rt on rt.type_id = room.type_id\n" +
-            "LEFT JOIN room_status rs on rs.status_id = room.status_id\n" +
+    private static final String FIND_ALL = "SELECT * FROM room " +
+            "LEFT OUTER JOIN room_type rt on rt.type_id = room.type_id " +
+            "LEFT JOIN room_status rs on rs.status_id = room.status_id " +
             "LEFT JOIN hotel h on h.hotel_id = room.hotel_id;";
-    private static final String UPDATE_ROOM = "UPDATE room SET type_id=?, number_of_beds=?, status_id=?, price=?, hotel_id=? WHERE room_id=?";
+    private static final String UPDATE_ROOM = "UPDATE room " +
+            "SET type_id=?, number_of_beds=?, status_id=?, price=?, hotel_id=? WHERE room_id=?";
 
     public RoomDaoImpl(HikariConnectionPool connector) {
         super(connector, INSERT_INTO, FIND_BY_ID, FIND_ALL, UPDATE_ROOM);
