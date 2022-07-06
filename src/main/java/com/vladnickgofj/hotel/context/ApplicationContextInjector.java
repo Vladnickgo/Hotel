@@ -4,14 +4,13 @@ import com.vladnickgofj.hotel.connection.HikariConnectionPool;
 import com.vladnickgofj.hotel.controller.command.Command;
 import com.vladnickgofj.hotel.controller.command.home.*;
 import com.vladnickgofj.hotel.controller.command.user.*;
-import com.vladnickgofj.hotel.dao.UserDao;
-import com.vladnickgofj.hotel.dao.entity.User;
-import com.vladnickgofj.hotel.dao.impl.UserDaoImpl;
-import com.vladnickgofj.hotel.service.UserService;
-import com.vladnickgofj.hotel.service.impl.UserServiceImpl;
-import com.vladnickgofj.hotel.service.mapper.Mapper;
-import com.vladnickgofj.hotel.service.mapper.UserMapper;
-import com.vladnickgofj.hotel.controller.dto.UserDto;
+import com.vladnickgofj.hotel.controller.dto.*;
+import com.vladnickgofj.hotel.dao.*;
+import com.vladnickgofj.hotel.dao.entity.*;
+import com.vladnickgofj.hotel.dao.impl.*;
+import com.vladnickgofj.hotel.service.*;
+import com.vladnickgofj.hotel.service.impl.*;
+import com.vladnickgofj.hotel.service.mapper.*;
 import com.vladnickgofj.hotel.validator.UserValidator;
 
 import java.util.Collections;
@@ -24,11 +23,37 @@ public final class ApplicationContextInjector {
 
     private static final UserDao USER_DAO = new UserDaoImpl(HIKARI_CONNECTION_POOL);
 
+    private static final HotelDao HOTEL_DAO = new HotelDaoImpl(HIKARI_CONNECTION_POOL);
+
+    private static final RoomDao ROOM_DAO = new RoomDaoImpl(HIKARI_CONNECTION_POOL);
+
+    private static final RoomStatusDao ROOM_STATUS_DAO = new RoomStatusDaoImpl(HIKARI_CONNECTION_POOL);
+
+    private static final RoomTypeDao ROOM_TYPE_DAO = new RoomTypeDaoImpl(HIKARI_CONNECTION_POOL);
+
     private static final Mapper<UserDto, User> USER_MAPPER = new UserMapper();
+
+    public static final Mapper<HotelDto, Hotel> HOTEL_MAPPER = new HotelMapper();
+
+    private static final Mapper<RoomStatusDto, RoomStatus> ROOM_STATUS_MAPPER = new RoomStatusMapper();
+
+    private static final Mapper<RoomTypeDto, RoomType> ROOM_TYPE_MAPPER = new RoomTypeMapper();
+
+    private static final Mapper<RoomDtoResponse, Room> ROOM_MAPPER = new RoomResponseMapper();
+
+//    private static final Mapper<RoomDtoResponse, Room> ROOM_MAPPER = new RoomResponseMapper();
 
     private static final UserValidator USER_VALIDATOR = new UserValidator();
 
     private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_MAPPER, USER_VALIDATOR);
+
+    private static final HotelService HOTEL_SERVICE = new HotelServiceImpl(HOTEL_DAO, HOTEL_MAPPER);
+
+    private static final RoomService ROOM_SERVICE = new RoomServiceImpl(ROOM_DAO, ROOM_MAPPER);
+
+    private static final RoomStatusService ROOM_STATUS_SERVICE = new RoomStatusServiceImpl(ROOM_STATUS_DAO, ROOM_STATUS_MAPPER);
+
+    private static final RoomTypeService ROOM_TYPE_SERVICE = new RoomTypeServiceImpl(ROOM_TYPE_DAO, ROOM_TYPE_MAPPER);
 
     private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
 
@@ -49,6 +74,10 @@ public final class ApplicationContextInjector {
     private static final Command LOGIN_PAGE_COMMAND = new LoginPageCommand();
 
     private static final Command REGISTER_PAGE_COMMAND = new RegisterPageCommand();
+
+    private static final Command SHOW_HOTELS_COMMAND = new ShowHotelsCommand();
+
+    private static final Command SHOW_ROOMS_COMMAND = new ShowRoomsCommand();
 
     private static final Map<String, Command> USER_COMMAND_NAME_TO_COMMAND = initUserCommand();
 
@@ -79,6 +108,8 @@ public final class ApplicationContextInjector {
         homeCommandNameToCommand.put("register", REGISTER_COMMAND);
         homeCommandNameToCommand.put("login", LOGIN_COMMAND);
         homeCommandNameToCommand.put("show-profile", SHOW_PROFILE_COMMAND);
+        homeCommandNameToCommand.put("showHotels", SHOW_HOTELS_COMMAND);
+        homeCommandNameToCommand.put("showRooms", SHOW_ROOMS_COMMAND);
         homeCommandNameToCommand.put("defaultCommand", DEFAULT_COMMAND);
 
         return Collections.unmodifiableMap(homeCommandNameToCommand);
@@ -101,6 +132,20 @@ public final class ApplicationContextInjector {
 
     public UserService getUserService() {
         return USER_SERVICE;
+    }
+
+    public HotelService getHotelService() {
+        return HOTEL_SERVICE;
+    }
+
+    public RoomService getRoomService() { return ROOM_SERVICE; }
+
+    public RoomStatusService getRoomStatusService() {
+        return ROOM_STATUS_SERVICE;
+    }
+
+    public RoomTypeService getRoomTypeService() {
+        return ROOM_TYPE_SERVICE;
     }
 
     public Map<String, Command> getHomeCommandNameToCommand() {

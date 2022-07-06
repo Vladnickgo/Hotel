@@ -4,7 +4,7 @@ import java.lang.reflect.Type;
 import java.util.Objects;
 
 public class Room {
-    private final int id;
+    private final Integer id;
     private final RoomType roomType;
     private final int numberOfBeds;
     private final RoomStatus roomStatus;
@@ -25,7 +25,7 @@ public class Room {
     }
 
     public static final class Builder {
-        private int id;
+        private Integer id;
         private RoomType roomType;
         private int numberOfBeds;
         private RoomStatus roomStatus;
@@ -35,7 +35,7 @@ public class Room {
         private Builder() {
         }
 
-        public Builder id(int val) {
+        public Builder id(Integer val) {
             id = val;
             return this;
         }
@@ -70,7 +70,7 @@ public class Room {
         }
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -99,7 +99,7 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return id == room.id && numberOfBeds == room.numberOfBeds && price == room.price && Objects.equals(roomType, room.roomType) && Objects.equals(roomStatus, room.roomStatus) && Objects.equals(hotel, room.hotel);
+        return numberOfBeds == room.numberOfBeds && price == room.price && Objects.equals(id, room.id) && Objects.equals(roomType, room.roomType) && Objects.equals(roomStatus, room.roomStatus) && Objects.equals(hotel, room.hotel);
     }
 
     @Override
